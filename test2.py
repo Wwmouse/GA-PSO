@@ -274,11 +274,11 @@ end_point=[19,19]
 # 程序里使用到的地图全部定向到这个map上
 map=map1
 #粒子的数量
-number_of_particle=100
+number_of_particle=10
 #每条路径有多少个点
 step_per_route=35
 #迭代次数
-iteration=100
+iteration=10
 pso = PSO(number_of_particle, step_per_route,iteration)#初始化
 pso.evolve()#开始迭代
 plt.show()
