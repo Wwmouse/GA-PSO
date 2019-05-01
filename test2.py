@@ -20,13 +20,16 @@ def exist_way(a,b,c,d):  # 地图理解为左shang角为原点(x,y)访问map是y
     ny1 = int(math.floor(y1))
     ny2 = int(math.floor(y2))
     k=0
-    if ((y2-y1)/(x2-x1)<99999 and (y2-y1)/(x2-x1)>-99999):
-        k=(y2-y1)/(x2-x1)
+    if (x1==x2):
+        k=0
     else:
-        if ((y2-y1)/(x2-x1)<-99999):
-            k=-99999
+        if ((y2-y1)/(x2-x1)<99999 and (y2-y1)/(x2-x1)>-99999):
+            k=(y2-y1)/(x2-x1)
         else:
-            k=99999
+            if ((y2-y1)/(x2-x1)<-99999):
+                k=-99999
+            else:
+                k=99999
     b=y1-k*x1
     # print(k,"    ",b)
     if ( x1 < 0 )or ( x2 < 0 )or ( y1 < 0 )or ( y2 < 0 )or\
@@ -526,7 +529,7 @@ for j in range(len(map)):
             plt.plot(xx, yy)
 x1=[19,16.78980877158566 ]
 y1=[19, 8.39007763126324]
-print(exist_way(x1[0],y1[0],x1[1],y1[1]))
+#print(exist_way(x1[0],y1[0],x1[1],y1[1]))
 plt.plot(x1,y1)
 pso = PSO(number_of_particle, step_per_route,iteration)#初始化
 pso.evolve()#开始迭代
