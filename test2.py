@@ -20,10 +20,13 @@ def exist_way(a,b,c,d):  # 地图理解为左shang角为原点(x,y)访问map是y
     ny1 = int(math.floor(y1))
     ny2 = int(math.floor(y2))
     k=0
-    if (y2-y1)<99999*(x2-x1) and (y2-y1)>-99999*(x2-x1): k=(y2-y1)/(x2-x1)
-    if (y2 - y1) > 99999 * (x2 - x1): k=99999
-    if (y2 - y1) < -99999 * (x2 - x1): k = -99999
-
+    if ((y2-y1)/(x2-x1)<99999 and (y2-y1)/(x2-x1)>-99999):
+        k=(y2-y1)/(x2-x1)
+    else:
+        if ((y2-y1)/(x2-x1)<-99999):
+            k=-99999
+        else:
+            k=99999
     b=y1-k*x1
     # print(k,"    ",b)
     if ( x1 < 0 )or ( x2 < 0 )or ( y1 < 0 )or ( y2 < 0 )or\
@@ -92,7 +95,7 @@ def azimuthAngle( x1,  y1,  x2,  y2):
 class PSO(object):
     def __init__(self, population_size, step, iteration):
         self.w = 0.6  # 惯性权重
-        self.c1 = self.c2 =2
+        self.c1 = self.c2 =0.2
         self.population_size = population_size  # 粒子群数量
         self.dim = 2  # 搜索空间的维度,每条路径中路径点的个数
         self.points = step  # 路径由几个点组成
@@ -119,30 +122,22 @@ class PSO(object):
         self.per_correct = 5  # 单步最大纠正次数
         self.correct=step*self.per_correct  # 最大单路径纠正次数
         self.maxdis=0  # 粒子间最大距离
-        '''
-        for i in range(self.population_size):
-            # =================================================画图分界线===============
-            for j in range(len(map)):
-                for k in range(len(map[j])):
-                    if (map[j][k] == 0):
-                        xx = [j, j, j + 1, j + 1, j]
-                        yy = [k, k + 1, k + 1, k, k]
-                        plt.plot(xx, yy)
-            plt.plot(self.x[i, :, 0], self.x[i, :, 1], 'b.')
-            plt.plot(self.pg[:, 0], self.pg[:, 1], 'k--')
-            plt.plot(self.p[i, :, 0], self.p[i, :, 1], 'k--')
-            plt.title('This is init iteration ' + str(i) + ' partical ')
-            plt.xlim(self.x_bound[0], self.x_bound[1])
-            plt.ylim(self.y_bound[0], self.y_bound[1])
-            my_x_ticks = np.arange(self.x_bound[0], self.x_bound[1], 1)
-            my_y_ticks = np.arange(self.y_bound[0], self.y_bound[1], 1)
-            plt.xticks(my_x_ticks)
-            plt.yticks(my_y_ticks)
-            plt.pause(0.1)
-            # =================================================画图分界线===============
-        a=0
 
-         '''
+        plt.clf()
+        for j in range(len(map)):
+            for k in range(len(map[j])):
+                if (map[j][k] == 0):
+                    xx = [j, j, j + 1, j + 1, j]
+                    yy = [k, k + 1, k + 1, k, k]
+                    plt.plot(xx, yy)
+        for i in range(self.population_size):
+            plt.plot(self.x[i, :, 0], self.x[i, :, 1])
+        # plt.plot(self.pg[:, 0],self.pg[:, 1])
+        plt.title('This is init iteration')
+        plt.xlim(self.x_bound[0], self.x_bound[1])
+        plt.ylim(self.y_bound[0], self.y_bound[1])
+        plt.pause(0.01)
+
     def get_w(self,i,it):  # 惯性权重相似度更新
         w_max=1.0
         w_min=0.1
@@ -214,6 +209,22 @@ class PSO(object):
         fig = plt.figure()
         acnumber=0
         for step in range(self.iteration):
+            '''
+            plt.clf()
+            for j in range(len(map)):
+                for k in range(len(map[j])):
+                    if (map[j][k] == 0):
+                        xx = [j, j, j + 1, j + 1, j]
+                        yy = [k, k + 1, k + 1, k, k]
+                        plt.plot(xx, yy)
+            for i in range(self.population_size):
+                plt.plot(self.x[i, :, 0], self.x[i, :, 1])
+            # plt.plot(self.pg[:, 0],self.pg[:, 1])
+            plt.title('This is ' + str(step) + ' iteration before ')
+            plt.xlim(self.x_bound[0], self.x_bound[1])
+            plt.ylim(self.y_bound[0], self.y_bound[1])
+            plt.pause(0.01)
+'''
             self.update_max_dis()
             #速度计算，这里还没有实现线性递减的惯性权重啊，或者是相似度的惯性权重，最简单的固定值
             for i in range(self.population_size):
@@ -223,7 +234,7 @@ class PSO(object):
                 # =================================================画图分界线===============
                 plt.figure()
                 plt.clf()
-                plt.plot(self.x[i,:, 0], self.x[i,:, 1])
+                plt.plot(self.x[i,:, 0], self.x[i,:, 1],'m-d')
                 plt.plot(self.pg[:, 0], self.pg[:, 1],'k--')
                 plt.plot(self.p[i, :, 0], self.p[i, :, 1],'k--')
                 for j in range(len(map)):
@@ -232,7 +243,7 @@ class PSO(object):
                             xx=[j,j,j+1,j+1,j]
                             yy=[k,k+1,k+1,k,k]
                             plt.plot(xx, yy)
-                plt.title('This is ' + str(step)+ 'iteration '+str(i)+ ' partical ')
+                plt.title('This is ' + str(step)+ 'iteration '+str(i)+ ' partical before')
                 plt.xlim(self.x_bound[0], self.x_bound[1])
                 plt.ylim(self.y_bound[0], self.y_bound[1])
                 my_x_ticks = np.arange(self.x_bound[0],self.x_bound[1], 1)
@@ -243,7 +254,7 @@ class PSO(object):
                 plt.show()  # 循环外
                 plt.close('all')
                 # =================================================画图分界线==============
-'''
+                '''
                 while (ac> 0):
                     ra1 = np.random.rand(self.points, self.dim)
                     ra2 = np.random.rand(self.points, self.dim)
@@ -257,8 +268,32 @@ class PSO(object):
                     ra2[self.points - 1][1] = 0
                     nv= self.w * self.v[i] + self.c1 * ra1 * (self.p[i] - self.x[i]) + self.c2 * ra2 * (self.pg - self.x[i])
                     nx=nv+self.x[i]
-
-
+                    '''
+                    # ================================================画图分界线===============
+                    plt.figure()
+                    plt.clf()
+                    plt.plot(self.x[i, :, 0], self.x[i, :, 1],'m-d')
+                    plt.plot(self.pg[:, 0], self.pg[:, 1], 'k--')
+                    plt.plot(self.p[i, :, 0], self.p[i, :, 1], 'k--')
+                    plt.plot(nx[:, 0], nx[:, 1], 'k--')
+                    for j in range(len(map)):
+                        for k in range(len(map[j])):
+                            if (map[j][k] == 0):
+                                xx = [j, j, j + 1, j + 1, j]
+                                yy = [k, k + 1, k + 1, k, k]
+                                plt.plot(xx, yy)
+                    plt.title('This is ' + str(step) + 'iteration ' + str(i) + ' partical after')
+                    plt.xlim(self.x_bound[0], self.x_bound[1])
+                    plt.ylim(self.y_bound[0], self.y_bound[1])
+                    my_x_ticks = np.arange(self.x_bound[0], self.x_bound[1], 1)
+                    my_y_ticks = np.arange(self.y_bound[0], self.y_bound[1], 1)
+                    plt.xticks(my_x_ticks)
+                    plt.yticks(my_y_ticks)
+                    plt.pause(3)
+                    plt.show()  # 循环外
+                    plt.close('all')
+                    # =================================================画图分界线==============
+'''
                     if allow_punish==1:
                         '''
                         # =================================================画图分界线===============
@@ -389,7 +424,7 @@ class PSO(object):
             for i in range(self.population_size):
                 plt.plot(self.x[i,:,0],self.x[i,:,1])
            # plt.plot(self.pg[:, 0],self.pg[:, 1])
-            plt.title('This is '+str(step)+' iteration')
+            plt.title('This is '+str(step)+' iteration after ')
             plt.xlim(self.x_bound[0], self.x_bound[1])
             plt.ylim(self.y_bound[0], self.y_bound[1])
             plt.pause(0.01)
@@ -433,8 +468,13 @@ class PSO(object):
                         j=0
                         #如果当前点到终点不存在一条直线，那么j=0一切重来
                     else:#如果存在路径，将重点放进路径末尾
-                        self.x[i][j+1][0]=end_point[0]
-                        self.x[i][j+1][1]  =end_point[1]
+                     #   print(end_point[0],'  ', end_point[1],'  ', self.x[i][j][0],'  ' ,self.x[i][j][1],'  ',exist_way(end_point[0], end_point[1], self.x[i][j][0] ,self.x[i][j][1] ))
+                        self.x[i][j + 1][0] = end_point[0]
+                        self.x[i][j + 1][1] = end_point[1]
+
+
+
+                        break
         return 0
 
 
@@ -477,10 +517,21 @@ allow_punish=1      #允许惩罚开关
 punish=1000  #惩罚值
 #迭代次数
 iteration=20
+plt.clf()
+for j in range(len(map)):
+    for k in range(len(map[j])):
+        if (map[j][k] == 0):
+            xx = [j, j, j + 1, j + 1, j]
+            yy = [k, k + 1, k + 1, k, k]
+            plt.plot(xx, yy)
+x1=[19,16.78980877158566 ]
+y1=[19, 8.39007763126324]
+print(exist_way(x1[0],y1[0],x1[1],y1[1]))
+plt.plot(x1,y1)
 pso = PSO(number_of_particle, step_per_route,iteration)#初始化
 pso.evolve()#开始迭代
+#print(pso.global_best_fitness)
 plt.show()
 end_time=time.time()
 print("using time = ",end_time-start_time)
 print("avg time = ",(end_time-start_time)/number_of_particle)
-print(pso.global_best_fitness)
