@@ -19,7 +19,11 @@ def exist_way(a,b,c,d):  # 地图理解为左shang角为原点(x,y)访问map是y
     nx2 = int(math.floor(x2))
     ny1 = int(math.floor(y1))
     ny2 = int(math.floor(y2))
-    k=(y2-y1)/(x2-x1)
+    k=0
+    if (y2-y1)<99999*(x2-x1) and (y2-y1)>-99999*(x2-x1): k=(y2-y1)/(x2-x1)
+    if (y2 - y1) > 99999 * (x2 - x1): k=99999
+    if (y2 - y1) < -99999 * (x2 - x1): k = -99999
+
     b=y1-k*x1
     # print(k,"    ",b)
     if ( x1 < 0 )or ( x2 < 0 )or ( y1 < 0 )or ( y2 < 0 )or\
@@ -115,7 +119,27 @@ class PSO(object):
         self.per_correct = 5  # 单步最大纠正次数
         self.correct=step*self.per_correct  # 最大单路径纠正次数
         self.maxdis=0  # 粒子间最大距离
-
+        for i in range(self.population_size):
+            # =================================================画图分界线===============
+            for j in range(len(map)):
+                for k in range(len(map[j])):
+                    if (map[j][k] == 0):
+                        xx = [j, j, j + 1, j + 1, j]
+                        yy = [k, k + 1, k + 1, k, k]
+                        plt.plot(xx, yy)
+            plt.plot(self.x[i, :, 0], self.x[i, :, 1], 'b.')
+            plt.plot(self.pg[:, 0], self.pg[:, 1], 'k--')
+            plt.plot(self.p[i, :, 0], self.p[i, :, 1], 'k--')
+            plt.title('This is ' + str(step) + 'iteration ' + str(i) + ' partical ')
+            plt.xlim(self.x_bound[0], self.x_bound[1])
+            plt.ylim(self.y_bound[0], self.y_bound[1])
+            my_x_ticks = np.arange(self.x_bound[0], self.x_bound[1], 1)
+            my_y_ticks = np.arange(self.y_bound[0], self.y_bound[1], 1)
+            plt.xticks(my_x_ticks)
+            plt.yticks(my_y_ticks)
+            plt.pause(0.1)
+            # =================================================画图分界线===============
+        a=0
 
     def get_w(self,i,it):  # 惯性权重相似度更新
         w_max=1.0
@@ -153,6 +177,7 @@ class PSO(object):
 
     #计算适应度，通过距离（系数k1）加上平滑度(系数k2)吧，适应度越小越好
     def calculate_fitness(self, x):
+
         #路径系数
         k1=self.k1
         #平滑度系数
@@ -169,8 +194,15 @@ class PSO(object):
             for j in range(1,self.points-1):#枚举除了起点终点外所有点
                 a=math.sqrt((x[i][j-1][0]-x[i][j+1][0])*(x[i][j-1][0]-x[i][j+1][0])+(x[i][j-1][1]-x[i][j+1][1])*(x[i][j-1][1]-x[i][j+1][1]))
                 #计算这个点的对边长度
-                theta=(a*a-d[j]*d[j]-d[j-1]*d[j-1])/(-2*d[j]*d[j-1])#余弦定理，计算出这个点的余弦值
-                fitx=fitx+k2*theta#日常加上平滑度
+                if (d[j]!=0) and ( d[j-1]!=0):
+                    theta=(a*a-d[j]*d[j]-d[j-1]*d[j-1])/(-2*d[j]*d[j-1])#余弦定理，计算出这个点的余弦值
+                    fitx=fitx+k2*theta#日常加上平滑度
+
+            for j in range(self.points-2):#枚举除了终点外所有点
+                if(exist_way(self.x[i][j][0],self.x[i][j][1],self.x[i][j+1][0],self.x[i][j+1][1])==0):
+                    fitx = fitx +punish
+
+
             fit[i]=fitx
 
         return fit
@@ -184,8 +216,10 @@ class PSO(object):
             #速度计算，这里还没有实现线性递减的惯性权重啊，或者是相似度的惯性权重，最简单的固定值
             for i in range(self.population_size):
                 self.get_w(i,step)  # 粒子惯性权重相似度更新
-                plt.figure()
                 ac=10086
+                '''
+                # =================================================画图分界线===============
+                plt.figure()
                 plt.clf()
                 plt.plot(self.x[i,:, 0], self.x[i,:, 1])
                 plt.plot(self.pg[:, 0], self.pg[:, 1],'k--')
@@ -199,17 +233,15 @@ class PSO(object):
                 plt.title('This is ' + str(step)+ 'iteration '+str(i)+ ' partical ')
                 plt.xlim(self.x_bound[0], self.x_bound[1])
                 plt.ylim(self.y_bound[0], self.y_bound[1])
-
                 my_x_ticks = np.arange(self.x_bound[0],self.x_bound[1], 1)
                 my_y_ticks = np.arange(self.y_bound[0],self.y_bound[1],1)
                 plt.xticks(my_x_ticks)
                 plt.yticks(my_y_ticks)
                 plt.pause(3)
-
                 plt.show()  # 循环外
                 plt.close('all')
-
-                plt.figure()
+                # =================================================画图分界线==============
+'''
                 while (ac> 0):
                     ra1 = np.random.rand(self.points, self.dim)
                     ra2 = np.random.rand(self.points, self.dim)
@@ -223,96 +255,115 @@ class PSO(object):
                     ra2[self.points - 1][1] = 0
                     nv= self.w * self.v[i] + self.c1 * ra1 * (self.p[i] - self.x[i]) + self.c2 * ra2 * (self.pg - self.x[i])
                     nx=nv+self.x[i]
+                    if allow_punish==1:
+                        self.v[i] = nv
+                        self.x[i] = nx
+                        for j in range(self.points):
+                            if (self.x[i][j][0]<0):self.x[i][j][0]=0
+                            if (self.x[i][j][0]>len(map[0])): self.x[i][j][0]=len(map[0])
+                            if (self.x[i][j][1] < 0): self.x[i][j][1] = 0
+                            if (self.x[i][j][1] > len(map)): self.x[i][j][1] = len(map)
+                            if (self.v[i][j][0] < 0): self.x[i][j][0] = 0
+                            if (self.v[i][j][0] > len(map[0])): self.x[i][j][0] = len(map[0])
+                            if (self.v[i][j][1] < 0): self.x[i][j][1] = 0
+                            if (self.v[i][j][1] > len(map)): self.x[i][j][1] = len(map)
+                        break;
+                    else:
 
-                    for j in range(len(map)):
-                        for k in range(len(map[j])):
-                            if (map[j][k] == 0):
-                                xx = [j, j, j + 1, j + 1, j]
-                                yy = [k, k + 1, k + 1, k, k]
-                                plt.plot(xx, yy)
-                    plt.plot(nx[:, 0],nx[:, 1],'m-d')
-                    plt.plot(nv[:, 0], nv[:, 1], 'b.')
-                    plt.plot(self.x[i, :, 0], self.x[i, :, 1], 'b.')
-                    plt.plot(self.pg[:, 0], self.pg[:, 1],'k--')
-                    plt.plot(self.p[i, :, 0], self.p[i, :, 1],'k--')
-                    plt.title('This is ' + str(step) + 'iteration ' + str(i)+ ' partical ')
-                    plt.xlim(self.x_bound[0], self.x_bound[1])
-                    plt.ylim(self.y_bound[0], self.y_bound[1])
-                    my_x_ticks = np.arange(self.x_bound[0], self.x_bound[1], 1)
-                    my_y_ticks = np.arange(self.y_bound[0], self.y_bound[1], 1)
-                    plt.xticks(my_x_ticks)
-                    plt.yticks(my_y_ticks)
-                    plt.pause(0.1)
+                        #=================================================画图分界线===============
+                        for j in range(len(map)):
+                            for k in range(len(map[j])):
+                                if (map[j][k] == 0):
+                                    xx = [j, j, j + 1, j + 1, j]
+                                    yy = [k, k + 1, k + 1, k, k]
+                                    plt.plot(xx, yy)
+                        plt.plot(nx[:, 0],nx[:, 1],'m-d')
+                        plt.plot(nv[:, 0], nv[:, 1], 'b.')
+                        plt.plot(self.x[i, :, 0], self.x[i, :, 1], 'b.')
+                        plt.plot(self.pg[:, 0], self.pg[:, 1],'k--')
+                        plt.plot(self.p[i, :, 0], self.p[i, :, 1],'k--')
+                        plt.title('This is ' + str(step) + 'iteration ' + str(i)+ ' partical ')
+                        plt.xlim(self.x_bound[0], self.x_bound[1])
+                        plt.ylim(self.y_bound[0], self.y_bound[1])
+                        my_x_ticks = np.arange(self.x_bound[0], self.x_bound[1], 1)
+                        my_y_ticks = np.arange(self.y_bound[0], self.y_bound[1], 1)
+                        plt.xticks(my_x_ticks)
+                        plt.yticks(my_y_ticks)
+                        plt.pause(0.1)
+                        # =================================================画图分界线===============
 
-
-                    corr=0
-                    for j in range(1,self.points ):  # 对每一小段路径进行判断是不是可行
-                        per_count=0
-                        while (exist_way(nx[j][0], nx[j][1], nx[j - 1][0], nx[j - 1][1]) == 0):  # 等于0是不可行，那就不用了
-                            if (corr>self.correct):
+                        corr=0
+                        for j in range(1,self.points ):  # 对每一小段路径进行判断是不是可行
+                            per_count=0
+                            while (exist_way(nx[j][0], nx[j][1], nx[j - 1][0], nx[j - 1][1]) == 0):  # 等于0是不可行，那就不用了
+                                if (corr>self.correct):
+                                    break
+                                corr = corr + 1
+                                per_count = per_count + 1
+                                if(per_count>3* self.per_correct ):
+                                    break
+                                ra1 = np.random.rand(self.dim)
+                                ra2 = np.random.rand(self.dim)
+                                nv[j] = self.w * self.v[i][j] + self.c1 * ra1 * (self.p[i][j] - self.x[i][j]) + self.c2 * ra2 * (
+                                            self.pg[j] - self.x[i][j])
+                                nx[j] = nv[j] + self.x[i][j]
+                                # =================================================画图分界线===============
+                                for j1 in range(len(map)):
+                                    for k in range(len(map[j])):
+                                        if (map[j1][k] == 0):
+                                            xx = [j1, j1, j1 + 1, j1 + 1, j1]
+                                            yy = [k, k + 1, k + 1, k, k]
+                                            plt.plot(xx, yy)
+                                plt.plot(nx[:, 0], nx[:, 1], 'm-d')
+                                plt.plot(nv[:, 0], nv[:, 1], 'b.')
+                                plt.plot(self.x[i, :, 0], self.x[i, :, 1], 'b.')
+                                plt.plot(self.pg[:, 0], self.pg[:, 1], 'k--')
+                                plt.plot(self.p[i, :, 0], self.p[i, :, 1], 'k--')
+                                plt.title('This is ' + str(step) + 'iteration ' + str(i) + ' partical '+str(corr))
+                                plt.xlim(self.x_bound[0], self.x_bound[1])
+                                plt.ylim(self.y_bound[0], self.y_bound[1])
+                                my_x_ticks = np.arange(self.x_bound[0], self.x_bound[1], 1)
+                                my_y_ticks = np.arange(self.y_bound[0], self.y_bound[1], 1)
+                                plt.xticks(my_x_ticks)
+                                plt.yticks(my_y_ticks)
+                                plt.pause(0.1)
+                                # =================================================画图分界线===============
+                            if (per_count > 3* self.per_correct):
                                 break
-                            corr = corr + 1
-                            per_count = per_count + 1
-                            if(per_count>3* self.per_correct ):
-                                break
-                            ra1 = np.random.rand(self.dim)
-                            ra2 = np.random.rand(self.dim)
-                            nv[j] = self.w * self.v[i][j] + self.c1 * ra1 * (self.p[i][j] - self.x[i][j]) + self.c2 * ra2 * (
-                                        self.pg[j] - self.x[i][j])
-                            nx[j] = nv[j] + self.x[i][j]
 
-                            for j1 in range(len(map)):
-                                for k in range(len(map[j])):
-                                    if (map[j1][k] == 0):
-                                        xx = [j1, j1, j1 + 1, j1 + 1, j1]
-                                        yy = [k, k + 1, k + 1, k, k]
-                                        plt.plot(xx, yy)
-                            plt.plot(nx[:, 0], nx[:, 1], 'm-d')
-                            plt.plot(nv[:, 0], nv[:, 1], 'b.')
-                            plt.plot(self.x[i, :, 0], self.x[i, :, 1], 'b.')
-                            plt.plot(self.pg[:, 0], self.pg[:, 1], 'k--')
-                            plt.plot(self.p[i, :, 0], self.p[i, :, 1], 'k--')
-                            plt.title('This is ' + str(step) + 'iteration ' + str(i) + ' partical '+str(corr))
-                            plt.xlim(self.x_bound[0], self.x_bound[1])
-                            plt.ylim(self.y_bound[0], self.y_bound[1])
-                            my_x_ticks = np.arange(self.x_bound[0], self.x_bound[1], 1)
-                            my_y_ticks = np.arange(self.y_bound[0], self.y_bound[1], 1)
-                            plt.xticks(my_x_ticks)
-                            plt.yticks(my_y_ticks)
-                            plt.pause(0.1)
-                        if (per_count > 3* self.per_correct):
-                            break
-
-
-
-
-                    ac=0
-                    for j in range(self.points - 1):  # 对每一小段路径进行判断是不是可行
-                        if (exist_way(nx[j][0], nx[j][1], nx[j + 1][0], nx[j + 1][1]) == 0):  # 等于0是不可行，那就不用了
-                            ac = ac+1  # 不可行
-                    print('step ', step, ' partical  ', i, ' error times ', ac)
-                    if (ac==0):
-                        self.v[i]=nv
-                plt.show()  # 循环外
-                plt.close('all')
+                        ac=0
+                        for j in range(self.points - 1):  # 对每一小段路径进行判断是不是可行
+                            if (exist_way(nx[j][0], nx[j][1], nx[j + 1][0], nx[j + 1][1]) == 0):  # 等于0是不可行，那就不用了
+                                ac = ac+1  # 不可行
+                        print('step ', step, ' partical  ', i, ' error times ', ac)
+                        if (ac==0):
+                            self.v[i]=nv
 
             #画图
             plt.clf()
-            #你看看这里你会不会改让画图能画出路径
+            for j in range(len(map)):
+                for k in range(len(map[j])):
+                    if (map[j][k] == 0):
+                        xx = [j, j, j + 1, j + 1, j]
+                        yy = [k, k + 1, k + 1, k, k]
+                        plt.plot(xx, yy)
+            for i in range(self.population_size):
+                plt.plot(self.x[i,:,0],self.x[i,:,1])
             plt.plot(self.pg[:, 0],self.pg[:, 1])
-            plt.title('This is '+str(step)+'iteration')
+            plt.title('This is '+str(step)+' iteration')
             plt.xlim(self.x_bound[0], self.x_bound[1])
             plt.ylim(self.y_bound[0], self.y_bound[1])
             plt.pause(0.01)
+
+
             #画图结束
             #重新计算适应度
             fitness = self.calculate_fitness(self.x)
-            # 需要更新的个体，只有适应度变高了的粒子的id才会返回进update——id
-            update_id = np.greater(self.individual_best_fitness, fitness)
-            #更新粒子的历史最优
-            self.p[update_id] = self.x[update_id]#存下更小适应度的路径
-            self.individual_best_fitness[update_id] = fitness[update_id]#存下更小适应度的适应度……
             # 新一代出现了更小的fitness，所以更新全局最优fitness和位置
+            for i in range(self.population_size):
+                if fitness[i]<self.individual_best_fitness[i]:
+                    self.individual_best_fitness[i]=fitness[i]
+                    self.p[i]=self.x[i]
             if np.min(fitness) < self.global_best_fitness:#寻找最小适应度的是不是更新了全局
                 self.pg = self.x[np.argmin(fitness)]
                 self.global_best_fitness = np.min(fitness)
@@ -381,9 +432,11 @@ map=map1
 #粒子的数量
 number_of_particle=5
 #每条路径有多少个点
-step_per_route=30
+step_per_route=35
+allow_punish=1      #允许惩罚开关
+punish=1000  #惩罚值
 #迭代次数
-iteration=1
+iteration=100
 pso = PSO(number_of_particle, step_per_route,iteration)#初始化
 pso.evolve()#开始迭代
 plt.show()
