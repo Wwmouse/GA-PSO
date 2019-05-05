@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32d67531-9de1-4155-9c39-fffd73f7ee98" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/test2.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -12,66 +11,19 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/GA_PSO$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1557064317590" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/GA_PSO$test1.coverage" NAME="test1 Coverage Results" MODIFIED="1556779759437" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../github-ga" />
     <SUITE FILE_PATH="coverage/GA_PSO$PSO.coverage" NAME="PSO Coverage Results" MODIFIED="1556779919264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../github-ga" />
-    <SUITE FILE_PATH="coverage/GA_PSO$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1557046644045" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-  </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-699805531">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="7" />
-          <entry key="project.open.time.143" value="1" />
-          <entry key="project.open.time.25" value="1" />
-          <entry key="project.open.time.26" value="1" />
-          <entry key="project.open.time.31" value="1" />
-          <entry key="project.open.time.5" value="1" />
-          <entry key="project.open.time.51" value="1" />
-          <entry key="project.open.time.6" value="2" />
-          <entry key="project.open.time.7" value="2" />
-          <entry key="project.opened" value="10" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="py" value="2940" />
-          <entry key="txt" value="149" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="PLAIN_TEXT" value="149" />
-          <entry key="Python" value="2940" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="py" value="6" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="Python" value="6" />
-        </counts>
-      </usages-collector>
-    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="273" column="53" lean-forward="true" selection-start-line="273" selection-start-column="53" selection-end-line="273" selection-end-column="53" />
+            <state relative-caret-position="-2110">
+              <caret line="99" column="44" selection-start-line="99" selection-start-column="40" selection-end-line="99" selection-end-column="44" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#236#1758#0" />
-                <element signature="e#1842#2372#0" />
-                <element signature="e#4446#4790#0" />
-                <element signature="e#4831#5303#0" />
-                <element signature="e#5405#5921#0" />
-                <element signature="e#10077#11487#1" />
-                <element signature="e#14132#18594#0" />
               </folding>
             </state>
           </provider>
@@ -93,6 +45,9 @@
       <GitPushTagMode />
     </option>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/test2.py" root0="SKIP_INSPECTION" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -103,12 +58,6 @@
         <option value="$PROJECT_DIR$/test2.py" />
       </list>
     </option>
-  </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="575" />
@@ -122,18 +71,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="code" type="b2602c69:ProjectViewProjectNode" />
-              <item name="code" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope" />
+      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -246,6 +185,7 @@
       <option name="presentableId" value="Default" />
       <updated>1556442463820</updated>
       <workItem from="1556442465211" duration="474000" />
+      <workItem from="1557064148081" duration="287000" />
     </task>
     <task id="LOCAL-00001" summary="相似度惯性权重更新，对每一小段有问题的重新单个修正而不是重新随机路径，修改了判断路径是否存在的函数">
       <created>1556670468283</created>
@@ -286,7 +226,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="474000" />
+    <option name="totallyTimeSpent" value="761000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -298,7 +238,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.04088472" />
@@ -306,7 +246,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.28368795" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.28351957" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.28368795" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -320,15 +260,12 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.36461127" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.36461127" />
       <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="相似度惯性权重更新，对每一小段有问题的重新单个修正而不是重新随机路径，修改了判断路径是否存在的函数" />
@@ -418,61 +355,18 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://D:/Users/hp/AppData/Local/Programs/Python/Python37/Lib/site-packages/numpy/core/_methods.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../github-ga/test2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="8" column="5" lean-forward="true" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../github-ga/test1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../github-ga/PSOIndividual.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="33" column="9" selection-start-line="33" selection-start-column="9" selection-end-line="33" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../github-ga/PSO.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="111" column="40" selection-start-line="111" selection-start-column="40" selection-end-line="111" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../github-ga/ObjFunction.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://D:/Users/hp/AppData/Local/Programs/Python/Python37/Lib/site-packages/numpy/core/_methods.py" />
+    <entry file="file://$PROJECT_DIR$/../github-ga/test2.py" />
+    <entry file="file://$PROJECT_DIR$/../github-ga/test1.py" />
+    <entry file="file://$PROJECT_DIR$/../github-ga/PSOIndividual.py" />
+    <entry file="file://$PROJECT_DIR$/../github-ga/PSO.py" />
+    <entry file="file://$PROJECT_DIR$/../github-ga/ObjFunction.py" />
     <entry file="file://$PROJECT_DIR$/test2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="273" column="53" lean-forward="true" selection-start-line="273" selection-start-column="53" selection-end-line="273" selection-end-column="53" />
+        <state relative-caret-position="-2110">
+          <caret line="99" column="44" selection-start-line="99" selection-start-column="40" selection-end-line="99" selection-end-column="44" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#236#1758#0" />
-            <element signature="e#1842#2372#0" />
-            <element signature="e#4446#4790#0" />
-            <element signature="e#4831#5303#0" />
-            <element signature="e#5405#5921#0" />
-            <element signature="e#10077#11487#1" />
-            <element signature="e#14132#18594#0" />
           </folding>
         </state>
       </provider>

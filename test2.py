@@ -13,8 +13,6 @@ def exist_way(a,b,c,d):  # 地图理解为左shang角为原点(x,y)访问map是y
     x2=c
     y2=d
 
-
-
     nx1=int(math.floor(x1))
     nx2 = int(math.floor(x2))
     ny1 = int(math.floor(y1))
@@ -154,7 +152,6 @@ class PSO(object):
         self.w= w_min + math.sqrt((self.iteration-it)/self.iteration)*((w_max-w_min)*(1-r))
 
     def update_max_dis(self):
-
         maxdis=-1
         for i in range(self.population_size):
             for j in range(self.population_size):
@@ -279,13 +276,8 @@ class PSO(object):
                                 self.x[i][j][1] = 0
                             if (self.x[i][j][1] > len(map)):
                                 self.x[i][j][1] = len(map)
-
-
-
-
                         break;
                     else:
-
                         #=================================================画图分界线===============
                         for j in range(len(map)):
                             for k in range(len(map[j])):
@@ -309,7 +301,7 @@ class PSO(object):
                         # =================================================画图分界线===============
 
                         corr=0
-                        for j in range(1,self.points ):  # 对每一小段路径进行判断是不是可行
+                        for j in range(1,self.points):  # 对每一小段路径进行判断是不是可行
                             per_count=0
                             while (exist_way(nx[j][0], nx[j][1], nx[j - 1][0], nx[j - 1][1]) == 0):  # 等于0是不可行，那就不用了
                                 if (corr>self.correct):
@@ -370,10 +362,25 @@ class PSO(object):
             plt.ylim(self.y_bound[0], self.y_bound[1])
             plt.pause(0.01)
 
-
             #画图结束
             #重新计算适应度
             fitness = self.calculate_fitness(self.x)
+
+            # 遗传算法
+            tmp_x = deepcopy(self.x)
+            # 交叉互换
+            for i in range(int(len(self.x) * genetic_percent)):
+                p1 = np.random.randint(0, self.population_size)  # 随机选取两个粒子
+                p2 = np.random.randint(0, self.population_size)
+                rand_point = np.random.randint(0, self.points)
+                tmp = tmp_x[p1][rand_point]
+                tmp_x[p1][rand_point] = tmp_x[p2][rand_point]
+                tmp_x[p2][rand_point] = tmp
+            tmp_fitness = self.calculate_fitness(tmp_x)
+            for i in range(len(tmp_fitness)):
+                if tmp_fitness[i] < fitness[i]:
+                    self.x[i] = tmp_x[i]
+
             # 新一代出现了更小的fitness，所以更新全局最优fitness和位置
             for i in range(self.population_size):
                 if fitness[i]<self.individual_best_fitness[i]:
@@ -383,9 +390,8 @@ class PSO(object):
                 # print("???")
                 self.pg = deepcopy(self.x[np.argmin(fitness)])
                 self.global_best_fitness = deepcopy(np.min(fitness))
-            # print('best fitness: %.5f, mean fitness: %.5f' % (self.global_best_fitness, np.mean(fitness)))
-           # print(fitness)
-            print("当前平均适应度",np.mean(fitness)," 最优适应度  ",self.global_best_fitness )
+
+            print("当前平均适应度",np.mean(fitness)," 最优适应度  ",self.global_best_fitness)
 
     #初始化生成粒子x的部分
     def initx(self):
@@ -413,9 +419,6 @@ class PSO(object):
                      #   print(end_point[0],'  ', end_point[1],'  ', self.x[i][j][0],'  ' ,self.x[i][j][1],'  ',exist_way(end_point[0], end_point[1], self.x[i][j][0] ,self.x[i][j][1] ))
                         self.x[i][j + 1][0] = end_point[0]
                         self.x[i][j + 1][1] = end_point[1]
-
-
-
                         break
         return 0
 
@@ -452,13 +455,15 @@ end_point=[19,19]
 # 程序里使用到的地图全部定向到这个map上
 map=map1
 #粒子的数量
-number_of_particle=20
+number_of_particle=40
 #每条路径有多少个点
 step_per_route=35
 allow_punish=1      #允许惩罚开关
 punish=1000  #惩罚值
 #迭代次数
-iteration=20
+iteration=30
+# 遗传算法比例
+genetic_percent = 0.3
 plt.clf()
 for j in range(len(map)):
     for k in range(len(map[j])):
