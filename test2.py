@@ -4,7 +4,7 @@ from numpy.linalg import cholesky
 import math
 import time  # 引入time模块
 import sys as sys
-
+from copy import deepcopy
 
 # 判断是否存在路径，存在返回1，不存在返回0
 def exist_way(a,b,c,d):  # 地图理解为左shang角为原点(x,y)访问map是y行x列map【y】【x】
@@ -31,6 +31,8 @@ def exist_way(a,b,c,d):  # 地图理解为左shang角为原点(x,y)访问map是y
             else:
                 k=99999
     b=y1-k*x1
+    if (b>99999):b=99999
+    if (b < -99999): b = -99999
     # print(k,"    ",b)
     if ( x1 < 0 )or ( x2 < 0 )or ( y1 < 0 )or ( y2 < 0 )or\
             ( x1 >= len(map) )or ( x2 >= len(map) )or ( y1 >= len(map[0]) )or ( y2 >= len(map[0])):
@@ -66,10 +68,11 @@ def exist_way(a,b,c,d):  # 地图理解为左shang角为原点(x,y)访问map是y
             if(map[i][a]==0):
                 dis=1
     for i in range(y_min,y_max):
-        a= int(math.floor((i-b)/k))
-        if a>=0 and a<len(map):
-            if (map[a][i] == 0):
-                dis = 1
+        if (k!=0):
+            a= int(math.floor((i-b)/k))
+            if a>=0 and a<len(map):
+                if (map[a][i] == 0):
+                    dis = 1
     if dis==0 :return 1
     else: return 0
 
@@ -107,8 +110,8 @@ class PSO(object):
         self.y_bound = [0, 20]  # 解空间范围
         self.mu=0  # 控制启发式初始化正态分布的变量，不要问我为什么没说作用，因为我忘记正态分布两个变量的名字了
         self.sigma=1  # 控制启发式初始化正态分布的变量
-        self.k1=1   # 适应度中路径长度的惩罚系数
-        self.k2=1   # 适应度中平滑度的惩罚系数
+        self.k1=0.5   # 适应度中路径长度的惩罚系数
+        self.k2=0.5   # 适应度中平滑度的惩罚系数
         self.x=np.zeros((self.population_size, self.points, self.dim))# 初始化粒子群位置
         self.initx()#调用启发式初始化的程序
         self.v = np.random.rand(self.population_size, self.points,self.dim)  # 初始化粒子群速度
@@ -119,7 +122,7 @@ class PSO(object):
             self.v[i][self.points-1][1] = 0
         fitness = self.calculate_fitness(self.x)#调用计算适应度的函数，获得适应度的矩阵
         self.p = self.x  # 个体的最佳路径          我们的适应度是越小越好
-        self.pg = self.x[np.argmin(fitness)]  # 全局最佳路径
+        self.pg =deepcopy( self.x[np.argmin(fitness)])  # 全局最佳路径
         self.individual_best_fitness = fitness  # 个体的最优适应度
         self.global_best_fitness = np.min(fitness)  # 全局最佳适应度
         self.per_correct = 5  # 单步最大纠正次数
@@ -212,52 +215,11 @@ class PSO(object):
         fig = plt.figure()
         acnumber=0
         for step in range(self.iteration):
-            '''
-            plt.clf()
-            for j in range(len(map)):
-                for k in range(len(map[j])):
-                    if (map[j][k] == 0):
-                        xx = [j, j, j + 1, j + 1, j]
-                        yy = [k, k + 1, k + 1, k, k]
-                        plt.plot(xx, yy)
-            for i in range(self.population_size):
-                plt.plot(self.x[i, :, 0], self.x[i, :, 1])
-            # plt.plot(self.pg[:, 0],self.pg[:, 1])
-            plt.title('This is ' + str(step) + ' iteration before ')
-            plt.xlim(self.x_bound[0], self.x_bound[1])
-            plt.ylim(self.y_bound[0], self.y_bound[1])
-            plt.pause(0.01)
-'''
             self.update_max_dis()
             #速度计算，这里还没有实现线性递减的惯性权重啊，或者是相似度的惯性权重，最简单的固定值
             for i in range(self.population_size):
                 self.get_w(i,step)  # 粒子惯性权重相似度更新
                 ac=10086
-                '''
-                # =================================================画图分界线===============
-                plt.figure()
-                plt.clf()
-                plt.plot(self.x[i,:, 0], self.x[i,:, 1],'m-d')
-                plt.plot(self.pg[:, 0], self.pg[:, 1],'k--')
-                plt.plot(self.p[i, :, 0], self.p[i, :, 1],'k--')
-                for j in range(len(map)):
-                    for k in range(len(map[j])):
-                        if (map[j][k]==0):
-                            xx=[j,j,j+1,j+1,j]
-                            yy=[k,k+1,k+1,k,k]
-                            plt.plot(xx, yy)
-                plt.title('This is ' + str(step)+ 'iteration '+str(i)+ ' partical before')
-                plt.xlim(self.x_bound[0], self.x_bound[1])
-                plt.ylim(self.y_bound[0], self.y_bound[1])
-                my_x_ticks = np.arange(self.x_bound[0],self.x_bound[1], 1)
-                my_y_ticks = np.arange(self.y_bound[0],self.y_bound[1],1)
-                plt.xticks(my_x_ticks)
-                plt.yticks(my_y_ticks)
-                plt.pause(3)
-                plt.show()  # 循环外
-                plt.close('all')
-                # =================================================画图分界线==============
-                '''
                 while (ac> 0):
                     ra1 = np.random.rand(self.points, self.dim)
                     ra2 = np.random.rand(self.points, self.dim)
@@ -298,29 +260,6 @@ class PSO(object):
                     # =================================================画图分界线==============
 '''
                     if allow_punish==1:
-                        '''
-                        # =================================================画图分界线===============
-                        for j in range(len(map)):
-                            for k in range(len(map[j])):
-                                if (map[j][k] == 0):
-                                    xx = [j, j, j + 1, j + 1, j]
-                                    yy = [k, k + 1, k + 1, k, k]
-                                    plt.plot(xx, yy)
-                        plt.plot(nx[:, 0], nx[:, 1], 'm-d')
-                        # plt.plot(nv[:, 0], nv[:, 1], 'b.')
-                        plt.plot(self.x[i, :, 0], self.x[i, :, 1], 'b.')
-                        # plt.plot(self.pg[:, 0], self.pg[:, 1], 'k--')
-                        # plt.plot(self.p[i, :, 0], self.p[i, :, 1], 'k--')
-                        plt.title('This is ' + str(step) + 'iteration ' + str(i) + ' partical old and before')
-                        plt.xlim(self.x_bound[0], self.x_bound[1])
-                        plt.ylim(self.y_bound[0], self.y_bound[1])
-                        my_x_ticks = np.arange(self.x_bound[0], self.x_bound[1], 1)
-                        my_y_ticks = np.arange(self.y_bound[0], self.y_bound[1], 1)
-                        plt.xticks(my_x_ticks)
-                        plt.yticks(my_y_ticks)
-                        plt.pause(0.1)
-                        # =================================================画图分界线===============
-                        '''
                         self.v[i] = nv
                         self.x[i] = nx
                         for j in range(self.points):
@@ -424,9 +363,8 @@ class PSO(object):
                         xx = [j, j, j + 1, j + 1, j]
                         yy = [k, k + 1, k + 1, k, k]
                         plt.plot(xx, yy)
-            for i in range(self.population_size):
-                plt.plot(self.x[i,:,0],self.x[i,:,1])
-           # plt.plot(self.pg[:, 0],self.pg[:, 1])
+            for i in range(self.population_size): plt.plot(self.x[i,:,0],self.x[i,:,1])
+            # plt.plot(self.pg[:, 0],self.pg[:, 1])
             plt.title('This is '+str(step)+' iteration after ')
             plt.xlim(self.x_bound[0], self.x_bound[1])
             plt.ylim(self.y_bound[0], self.y_bound[1])
@@ -442,8 +380,9 @@ class PSO(object):
                     self.individual_best_fitness[i]=fitness[i]
                     self.p[i]=self.x[i]
             if np.min(fitness) < self.global_best_fitness:#寻找最小适应度的是不是更新了全局
-                self.pg = self.x[np.argmin(fitness)]
-                self.global_best_fitness = np.min(fitness)
+                # print("???")
+                self.pg = deepcopy(self.x[np.argmin(fitness)])
+                self.global_best_fitness = deepcopy(np.min(fitness))
             # print('best fitness: %.5f, mean fitness: %.5f' % (self.global_best_fitness, np.mean(fitness)))
            # print(fitness)
             print("当前平均适应度",np.mean(fitness)," 最优适应度  ",self.global_best_fitness )
@@ -538,3 +477,4 @@ plt.show()
 end_time=time.time()
 print("using time = ",end_time-start_time)
 print("avg time = ",(end_time-start_time)/number_of_particle)
+print("最终最优适应度：",pso.global_best_fitness)
