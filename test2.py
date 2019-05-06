@@ -172,7 +172,7 @@ class PSO(object):
         tdis = np.random.normal(self.mu, self.sigma, 1)     #随机一个长度
         while (tdis[0] < -1 or tdis[0] > 1):    #如果太长或太短
             tdis = np.random.normal(self.mu, self.sigma, 1) #重新随机
-        dis = 1 + tdis[0] / 3   #新的移动距离是1加上三分之一随机，即距离的范围是【0.67777，1.333333】
+        dis = 40/self.points + tdis[0] / 3   #新的移动距离是根据路径中的点数目而定
         return  theta[0],dis
 
     #计算适应度，通过距离（系数k1）加上平滑度(系数k2)吧，适应度越小越好
@@ -366,13 +366,13 @@ class PSO(object):
             #重新计算适应度
             fitness = self.calculate_fitness(self.x)
 
-            # 遗传算法
+            # --------- 遗传算法 -----------#
             tmp_x = deepcopy(self.x)
             # 交叉互换
             for i in range(int(len(self.x) * genetic_percent)):
                 p1 = np.random.randint(0, self.population_size)  # 随机选取两个粒子
                 p2 = np.random.randint(0, self.population_size)
-                rand_point = np.random.randint(0, self.points)
+                rand_point = np.random.randint(1, self.points)
                 tmp = tmp_x[p1][rand_point]
                 tmp_x[p1][rand_point] = tmp_x[p2][rand_point]
                 tmp_x[p2][rand_point] = tmp
@@ -380,6 +380,20 @@ class PSO(object):
             for i in range(len(tmp_fitness)):
                 if tmp_fitness[i] < fitness[i]:
                     self.x[i] = tmp_x[i]
+
+            tmp_x = deepcopy(self.x)
+            # 变异
+            for i in range(int(len(self.x))):
+                x_rand = -1 + 2*np.random.rand()
+                y_rand = -1 + 2*np.random.rand()
+                rand_point = np.random.randint(1, self.points) # 变化路径中的一个点
+                tmp_x[i][rand_point][0] += x_rand
+                tmp_x[i][rand_point][1] += y_rand
+            tmp_fitness = self.calculate_fitness(tmp_x)
+            for i in range(len(tmp_fitness)):
+                if tmp_fitness[i] < fitness[i]:
+                    self.x[i] = tmp_x[i]
+            # --------- 遗传算法 -----------#
 
             # 新一代出现了更小的fitness，所以更新全局最优fitness和位置
             for i in range(self.population_size):
@@ -455,13 +469,13 @@ end_point=[19,19]
 # 程序里使用到的地图全部定向到这个map上
 map=map1
 #粒子的数量
-number_of_particle=40
+number_of_particle=100
 #每条路径有多少个点
 step_per_route=35
 allow_punish=1      #允许惩罚开关
 punish=1000  #惩罚值
 #迭代次数
-iteration=30
+iteration=60
 # 遗传算法比例
 genetic_percent = 0.3
 plt.clf()
