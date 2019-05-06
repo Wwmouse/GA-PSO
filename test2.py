@@ -126,6 +126,11 @@ class PSO(object):
         self.per_correct = 5  # 单步最大纠正次数
         self.correct=step*self.per_correct  # 最大单路径纠正次数
         self.maxdis=0  # 粒子间最大距离
+        self.blocks=[]
+        for i in range(len(map)):
+            for j in range(len(map[0])):
+                if map[i][j]==0:
+                    self.blocks.append([i,j])
 
         plt.clf()
         for j in range(len(map)):
@@ -202,11 +207,29 @@ class PSO(object):
                 if(exist_way(self.x[i][j][0],self.x[i][j][1],self.x[i][j+1][0],self.x[i][j+1][1])==0):
                     fitx = fitx +punish
 
+            for j in range(self.points - 1):  #self.x[i][self.points-1] 这个是终点
+                if (exist_way(self.x[i][j][0], self.x[i][j][1], self.x[i][j + 1][0], self.x[i][j + 1][1]) == 1):
+                    fitx = fitx+self.punish_field(self.x[i][j][0],self.x[i][j][1],self.x[i][j+1][0],self.x[i][j+1][1])
+
 
             fit[i]=fitx
 
         return fit
 
+    def punish_field(self, a,b,c,d):
+        # print(a,'  ',b,'  ',c,'  ',d)
+        x1=a
+        x2=c
+        y1=b
+        y2=d
+        k=0
+        if x1==x2:
+            k=0
+        else:
+            k=(y1-y2)/(x2-x1)
+        b = y1 - k * x1
+
+        return 0
     #迭代程序
     def evolve(self):
         fig = plt.figure()
@@ -490,7 +513,7 @@ y1=[19, 8.39007763126324]
 #print(exist_way(x1[0],y1[0],x1[1],y1[1]))
 plt.plot(x1,y1)
 pso = PSO(number_of_particle, step_per_route,iteration)#初始化
-pso.evolve()#开始迭代
+# pso.evolve()#开始迭代
 #print(pso.global_best_fitness)
 plt.show()
 end_time=time.time()
