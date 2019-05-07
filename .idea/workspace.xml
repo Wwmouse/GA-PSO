@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="32d67531-9de1-4155-9c39-fffd73f7ee98" name="Default Changelist" comment="">
+    <list default="true" id="32d67531-9de1-4155-9c39-fffd73f7ee98" name="Default Changelist" comment="修改了终点的bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/test2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ga_pso.py" beforeDir="false" afterPath="$PROJECT_DIR$/ga_pso.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,50 +12,21 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/GA_PSO$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1557242338219" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/GA_PSO$test1.coverage" NAME="test1 Coverage Results" MODIFIED="1556779759437" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../github-ga" />
     <SUITE FILE_PATH="coverage/GA_PSO$PSO.coverage" NAME="PSO Coverage Results" MODIFIED="1556779919264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../github-ga" />
-    <SUITE FILE_PATH="coverage/GA_PSO$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1557162722560" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-  </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-699805531">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="1" />
-          <entry key="project.open.time.0" value="1" />
-          <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="dummy" value="5" />
-          <entry key="py" value="424" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="424" />
-        </counts>
-      </usages-collector>
-    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test2.py">
+        <entry file="file://$PROJECT_DIR$/ga_pso.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="225" column="18" lean-forward="true" selection-start-line="225" selection-start-column="18" selection-end-line="225" selection-end-column="18" />
+            <state relative-caret-position="-359">
+              <caret line="339" column="87" selection-start-line="339" selection-start-column="87" selection-end-line="339" selection-end-column="87" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
                 <element signature="e#261#1873#0" />
-                <element signature="e#2575#4707#0" />
-                <element signature="e#4575#4919#0" />
-                <element signature="e#4959#5431#0" />
-                <element signature="e#5533#6038#0" />
-                <element signature="e#6127#7243#0" />
-                <marker date="1557163136140" expanded="true" signature="7977:7999" ph="..." />
+                <element signature="e#11570#16031#0" />
               </folding>
             </state>
           </provider>
@@ -74,6 +45,10 @@
     <findStrings>
       <find>step_per_route</find>
       <find>np.random.rand</find>
+      <find>savefig</find>
+      <find>show</find>
+      <find>平滑度</find>
+      <find>ga</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -84,7 +59,7 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/test2.py" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/ga_pso.py" root0="SKIP_INSPECTION" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -94,18 +69,13 @@
         <option value="$PROJECT_DIR$/../github-ga/PSOIndividual.py" />
         <option value="$PROJECT_DIR$/../github-ga/ObjFunction.py" />
         <option value="$PROJECT_DIR$/test2.py" />
+        <option value="$PROJECT_DIR$/ga_pso.py" />
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
-    <option name="width" value="1045" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="191" />
+    <option name="width" value="1677" />
     <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -114,8 +84,18 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="GA-PSO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GA-PSO" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -195,7 +175,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test2.py" />
+      <option name="SCRIPT_NAME" value="E:\创新实验\code\GA-PSO\ga_pso.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -233,6 +213,10 @@
       <workItem from="1557114705714" duration="593000" />
       <workItem from="1557133881241" duration="6780000" />
       <workItem from="1557143363394" duration="2607000" />
+      <workItem from="1557211275976" duration="8060000" />
+      <workItem from="1557225436605" duration="4961000" />
+      <workItem from="1557240756342" duration="380000" />
+      <workItem from="1557241935843" duration="1714000" />
     </task>
     <task id="LOCAL-00001" summary="相似度惯性权重更新，对每一小段有问题的重新单个修正而不是重新随机路径，修改了判断路径是否存在的函数">
       <created>1556670468283</created>
@@ -276,11 +260,18 @@
       <option name="project" value="LOCAL" />
       <updated>1557064571660</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="修改了终点的bug">
+      <created>1557211864025</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1557211864025</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11127000" />
+    <option name="totallyTimeSpent" value="26242000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -292,44 +283,53 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="210" y="0" width="1341" height="840" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.06724512" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10288387" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932614" visible="true" weight="0.364539" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932614" weight="0.2019774" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.28368795" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32907802" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32907802" />
+      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32768363" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067383" side_tool="true" weight="0.23870057" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067383" side_tool="true" weight="0.23743017" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32907802" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32907802" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.29490617" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.42371705" />
       <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="相似度惯性权重更新，对每一小段有问题的重新单个修正而不是重新随机路径，修改了判断路径是否存在的函数" />
     <MESSAGE value="前一版本更新了existway中k可能无穷大无穷小，用99999代替了，这一版本更新了迭代的各种奇葩问题，但仍然收束不出理想解" />
     <MESSAGE value="existway 修改" />
     <MESSAGE value="添加了交叉互换的遗传算法&#10;尝试了一些次数，看不出效果如何。。&#10;不过确实是有通过这个遗传更新粒子的" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加了交叉互换的遗传算法&#10;尝试了一些次数，看不出效果如何。。&#10;不过确实是有通过这个遗传更新粒子的" />
+    <MESSAGE value="修改了终点的bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改了终点的bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -420,19 +420,21 @@
     <entry file="file://$PROJECT_DIR$/../github-ga/PSO.py" />
     <entry file="file://$PROJECT_DIR$/../github-ga/ObjFunction.py" />
     <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/1986093431/numpy/random/mtrand.py" />
-    <entry file="file://$PROJECT_DIR$/test2.py">
+    <entry file="file://C:/python37/Lib/site-packages/matplotlib/pyplot.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="225" column="18" lean-forward="true" selection-start-line="225" selection-start-column="18" selection-end-line="225" selection-end-column="18" />
+        <state relative-caret-position="194">
+          <caret line="2809" column="4" selection-start-line="2809" selection-start-column="4" selection-end-line="2809" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ga_pso.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-359">
+          <caret line="339" column="87" selection-start-line="339" selection-start-column="87" selection-end-line="339" selection-end-column="87" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
             <element signature="e#261#1873#0" />
-            <element signature="e#2575#4707#0" />
-            <element signature="e#4575#4919#0" />
-            <element signature="e#4959#5431#0" />
-            <element signature="e#5533#6038#0" />
-            <element signature="e#6127#7243#0" />
-            <marker date="1557163136140" expanded="true" signature="7977:7999" ph="..." />
+            <element signature="e#11570#16031#0" />
           </folding>
         </state>
       </provider>

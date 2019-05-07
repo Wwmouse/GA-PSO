@@ -132,21 +132,6 @@ class PSO(object):
                 if map[i][j]==0:
                     self.blocks.append([i,j])
 
-        plt.clf()
-        for j in range(len(map)):
-            for k in range(len(map[j])):
-                if (map[j][k] == 0):
-                    xx = [j, j, j + 1, j + 1, j]
-                    yy = [k, k + 1, k + 1, k, k]
-                    plt.plot(xx, yy)
-        for i in range(self.population_size):
-            plt.plot(self.x[i, :, 0], self.x[i, :, 1])
-        # plt.plot(self.pg[:, 0],self.pg[:, 1])
-        plt.title('This is init iteration')
-        plt.xlim(self.x_bound[0], self.x_bound[1])
-        plt.ylim(self.y_bound[0], self.y_bound[1])
-        plt.pause(0.01)
-
     def get_w(self,i,it):  # 惯性权重相似度更新
         w_max=1.0
         w_min=0.1
@@ -217,7 +202,6 @@ class PSO(object):
         return fit
 
     def punish_field(self, a,b,c,d):
-        # print(a,'  ',b,'  ',c,'  ',d)
         x1=a
         x2=c
         y1=b
@@ -232,6 +216,7 @@ class PSO(object):
         return 0
     #迭代程序
     def evolve(self):
+        f1 = open("E:/创新实验/code/GA-PSO/pictures/a.txt","w")
         fig = plt.figure()
         acnumber=0
         for step in range(self.iteration):
@@ -253,32 +238,6 @@ class PSO(object):
                     ra2[self.points - 1][1] = 0
                     nv= self.w * self.v[i] + self.c1 * ra1 * (self.p[i] - self.x[i]) + self.c2 * ra2 * (self.pg - self.x[i])
                     nx=nv+self.x[i]
-                    '''
-                    # ================================================画图分界线===============
-                    plt.figure()
-                    plt.clf()
-                    plt.plot(self.x[i, :, 0], self.x[i, :, 1],'m-d')
-                    plt.plot(self.pg[:, 0], self.pg[:, 1], 'k--')
-                    plt.plot(self.p[i, :, 0], self.p[i, :, 1], 'k--')
-                    plt.plot(nx[:, 0], nx[:, 1], 'k--')
-                    for j in range(len(map)):
-                        for k in range(len(map[j])):
-                            if (map[j][k] == 0):
-                                xx = [j, j, j + 1, j + 1, j]
-                                yy = [k, k + 1, k + 1, k, k]
-                                plt.plot(xx, yy)
-                    plt.title('This is ' + str(step) + 'iteration ' + str(i) + ' partical after')
-                    plt.xlim(self.x_bound[0], self.x_bound[1])
-                    plt.ylim(self.y_bound[0], self.y_bound[1])
-                    my_x_ticks = np.arange(self.x_bound[0], self.x_bound[1], 1)
-                    my_y_ticks = np.arange(self.y_bound[0], self.y_bound[1], 1)
-                    plt.xticks(my_x_ticks)
-                    plt.yticks(my_y_ticks)
-                    plt.pause(3)
-                    plt.show()  # 循环外
-                    plt.close('all')
-                    # =================================================画图分界线==============
-'''
                     if allow_punish==1:
                         self.v[i] = nv
                         self.x[i] = nx
@@ -379,10 +338,10 @@ class PSO(object):
                         yy = [k, k + 1, k + 1, k, k]
                         plt.plot(xx, yy)
             for i in range(self.population_size): plt.plot(self.x[i,:,0],self.x[i,:,1])
-            # plt.plot(self.pg[:, 0],self.pg[:, 1])
             plt.title('This is '+str(step)+' iteration after ')
             plt.xlim(self.x_bound[0], self.x_bound[1])
             plt.ylim(self.y_bound[0], self.y_bound[1])
+            plt.savefig("E:/创新实验/code/GA-PSO/pictures/ga/"+str(step)+".jpg")
             plt.pause(0.01)
 
             #画图结束
@@ -424,11 +383,11 @@ class PSO(object):
                     self.individual_best_fitness[i]=fitness[i]
                     self.p[i]=self.x[i]
             if np.min(fitness) < self.global_best_fitness:#寻找最小适应度的是不是更新了全局
-                # print("???")
                 self.pg = deepcopy(self.x[np.argmin(fitness)])
                 self.global_best_fitness = deepcopy(np.min(fitness))
 
             print("当前平均适应度",np.mean(fitness)," 最优适应度  ",self.global_best_fitness)
+            f1.write(str(self.global_best_fitness)+"\n")
 
     #初始化生成粒子x的部分
     def initx(self):
