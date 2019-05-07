@@ -395,7 +395,7 @@ class PSO(object):
             for i in range(int(len(self.x) * genetic_percent)):
                 p1 = np.random.randint(0, self.population_size)  # 随机选取两个粒子
                 p2 = np.random.randint(0, self.population_size)
-                rand_point = np.random.randint(1, self.points)
+                rand_point = np.random.randint(1, self.points-2)
                 tmp = tmp_x[p1][rand_point]
                 tmp_x[p1][rand_point] = tmp_x[p2][rand_point]
                 tmp_x[p2][rand_point] = tmp
@@ -409,7 +409,7 @@ class PSO(object):
             for i in range(int(len(self.x))):
                 x_rand = -1 + 2*np.random.rand()
                 y_rand = -1 + 2*np.random.rand()
-                rand_point = np.random.randint(1, self.points) # 变化路径中的一个点
+                rand_point = np.random.randint(1, self.points-2) # 变化路径中的一个点
                 tmp_x[i][rand_point][0] += x_rand
                 tmp_x[i][rand_point][1] += y_rand
             tmp_fitness = self.calculate_fitness(tmp_x)
@@ -513,7 +513,7 @@ y1=[19, 8.39007763126324]
 #print(exist_way(x1[0],y1[0],x1[1],y1[1]))
 plt.plot(x1,y1)
 pso = PSO(number_of_particle, step_per_route,iteration)#初始化
-# pso.evolve()#开始迭代
+pso.evolve()#开始迭代
 #print(pso.global_best_fitness)
 plt.show()
 end_time=time.time()
