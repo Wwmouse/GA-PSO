@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="32d67531-9de1-4155-9c39-fffd73f7ee98" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/test2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ga_pso.py" beforeDir="false" afterPath="$PROJECT_DIR$/ga_pso.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,29 +13,41 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/GA_PSO$test1.coverage" NAME="test1 Coverage Results" MODIFIED="1556779759437" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../github-ga" />
+    <SUITE FILE_PATH="coverage/GA_PSO$ga_pso.coverage" NAME="ga_pso Coverage Results" MODIFIED="1557412705034" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/GA_PSO$PSO.coverage" NAME="PSO Coverage Results" MODIFIED="1556779919264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../github-ga" />
-    <SUITE FILE_PATH="coverage/GA_PSO$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1557162722560" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/GA_PSO$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1557387831360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-699805531">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.31" value="3" />
           <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="5" />
-          <entry key="py" value="424" />
+          <entry key="py" value="2378" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="5" />
-          <entry key="Python" value="424" />
+          <entry key="Python" value="2378" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="py" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Python" value="1" />
         </counts>
       </usages-collector>
     </session>
@@ -43,19 +55,17 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test2.py">
+        <entry file="file://$PROJECT_DIR$/ga_pso.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="225" column="18" lean-forward="true" selection-start-line="225" selection-start-column="18" selection-end-line="225" selection-end-column="18" />
+            <state relative-caret-position="202">
+              <caret line="242" column="4" lean-forward="true" selection-start-line="242" selection-start-column="4" selection-end-line="242" selection-end-column="4" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
                 <element signature="e#261#1873#0" />
-                <element signature="e#2575#4707#0" />
-                <element signature="e#4575#4919#0" />
-                <element signature="e#4959#5431#0" />
-                <element signature="e#5533#6038#0" />
-                <element signature="e#6127#7243#0" />
-                <marker date="1557163136140" expanded="true" signature="7977:7999" ph="..." />
+                <element signature="e#1957#2487#0" />
+                <element signature="e#3363#3500#0" />
+                <element signature="e#9311#9609#0" />
+                <element signature="e#13297#17758#0" />
               </folding>
             </state>
           </provider>
@@ -83,9 +93,6 @@
       <GitPushTagMode />
     </option>
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/test2.py" root0="SKIP_INSPECTION" />
-  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -94,6 +101,7 @@
         <option value="$PROJECT_DIR$/../github-ga/PSOIndividual.py" />
         <option value="$PROJECT_DIR$/../github-ga/ObjFunction.py" />
         <option value="$PROJECT_DIR$/test2.py" />
+        <option value="$PROJECT_DIR$/ga_pso.py" />
       </list>
     </option>
   </component>
@@ -104,7 +112,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
+    <option name="x" value="817" />
+    <option name="y" value="42" />
     <option name="width" value="1045" />
     <option name="height" value="1050" />
   </component>
@@ -137,7 +146,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.test2">
+  <component name="RunManager" selected="Python.ga_pso">
     <configuration name="PSO" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="code" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -152,6 +161,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../github-ga/PSO.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ga_pso" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="code" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ga_pso.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -208,9 +239,11 @@
       <item itemvalue="Python.test2" />
       <item itemvalue="Python.PSO" />
       <item itemvalue="Python.test1" />
+      <item itemvalue="Python.ga_pso" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.ga_pso" />
         <item itemvalue="Python.test2" />
         <item itemvalue="Python.PSO" />
         <item itemvalue="Python.test1" />
@@ -293,14 +326,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.06724512" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932614" visible="true" weight="0.364539" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932614" visible="true" weight="0.3248227" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.28368795" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -314,7 +346,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.29490617" />
+      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.28217158" />
       <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
@@ -420,19 +452,18 @@
     <entry file="file://$PROJECT_DIR$/../github-ga/PSO.py" />
     <entry file="file://$PROJECT_DIR$/../github-ga/ObjFunction.py" />
     <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/1986093431/numpy/random/mtrand.py" />
-    <entry file="file://$PROJECT_DIR$/test2.py">
+    <entry file="file://$PROJECT_DIR$/test2.py" />
+    <entry file="file://$PROJECT_DIR$/ga_pso.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="225" column="18" lean-forward="true" selection-start-line="225" selection-start-column="18" selection-end-line="225" selection-end-column="18" />
+        <state relative-caret-position="202">
+          <caret line="242" column="4" lean-forward="true" selection-start-line="242" selection-start-column="4" selection-end-line="242" selection-end-column="4" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
             <element signature="e#261#1873#0" />
-            <element signature="e#2575#4707#0" />
-            <element signature="e#4575#4919#0" />
-            <element signature="e#4959#5431#0" />
-            <element signature="e#5533#6038#0" />
-            <element signature="e#6127#7243#0" />
-            <marker date="1557163136140" expanded="true" signature="7977:7999" ph="..." />
+            <element signature="e#1957#2487#0" />
+            <element signature="e#3363#3500#0" />
+            <element signature="e#9311#9609#0" />
+            <element signature="e#13297#17758#0" />
           </folding>
         </state>
       </provider>
