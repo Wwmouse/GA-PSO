@@ -223,7 +223,18 @@ class PSO(object):
                 #计算这个点的对边长度
                 if (d[j]!=0) and ( d[j-1]!=0):
                     theta=(a*a-d[j]*d[j]-d[j-1]*d[j-1])/(-2*d[j]*d[j-1])#余弦定理，计算出这个点的余弦值
-                    fitx=fitx+k2*theta#日常加上平滑度
+                    if (theta<-1):
+                        theta=-1
+                    if theta>1:
+                        theta=1
+                    u=math.acos(theta)
+                    degree=abs(math.degrees(u))
+                    print(degree )
+                    if degree<180-35:
+                        fitx = fitx + k2 * theta  # 日常加上平滑度
+                        # fitx = fitx + k2 * (180-degree)* (180-degree) # 日常加上平滑度
+                    else:
+                        fitx=fitx+k2*theta#日常加上平滑度
 
             for j in range(self.points-2):#枚举除了终点外所有点
                 if(exist_way(self.x[i][j][0],self.x[i][j][1],self.x[i][j+1][0],self.x[i][j+1][1])==0):
@@ -599,7 +610,7 @@ end_point=[19,19]
 # 程序里使用到的地图全部定向到这个map上
 map=map1
 #粒子的数量
-number_of_particle=70
+number_of_particle=50
 #每条路径有多少个点
 step_per_route=35
 allow_punish=1      #允许惩罚开关
@@ -626,11 +637,14 @@ safe_distance = 0.5
 # plt.yticks(my_y_ticks)
 # plt.show()
 
-pso = PSO(number_of_particle, step_per_route,iteration)#初始化
-# print('===========================================')
-# pso.punish_field(x1[0],y1[0],x1[1],y1[1])
+print(math.degrees(math.acos(1)))
 
-pso.evolve()#开始迭代
+
+# pso = PSO(number_of_particle, step_per_route,iteration)#初始化
+# pso.evolve()#开始迭代
+
+
+
 #print(pso.global_best_fitness)
 
 end_time=time.time()
