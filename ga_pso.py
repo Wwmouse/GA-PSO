@@ -65,12 +65,19 @@ def exist_way(a,b,c,d):  # 地图理解为左shang角为原点(x,y)访问map是y
         if a >= 0 and a < len(map[0]):
             if(map[i][a]==0):
                 dis=1
+            if (i-1>=0):
+                if(map[i-1][a] == 0):
+                    dis = 1
     for i in range(y_min,y_max):
         if (k!=0):
             a= int(math.floor((i-b)/k))
             if a>=0 and a<len(map):
                 if (map[a][i] == 0):
                     dis = 1
+                if (i - 1 >= 0):
+                    if (map[a][i-1] == 0):
+                        dis = 1
+
     if dis==0 :return 1
     else: return 0
 
@@ -95,9 +102,8 @@ def azimuthAngle( x1,  y1,  x2,  y2):
         angle = 3.0 * math.pi / 2.0 + math.atan(dy / -dx)
     return (angle)
 
-
 class PSO(object):
-    def __init__(self, population_size, step, iteration):
+    def __init__(self, population_size, step, iteration,k1,k2,iiii):
         self.w = 0.6  # 惯性权重
         self.c1 = self.c2 =0.2
         self.population_size = population_size  # 粒子群数量
@@ -108,9 +114,9 @@ class PSO(object):
         self.y_bound = [0, 20]  # 解空间范围
         self.mu=0  # 控制启发式初始化正态分布的变量，不要问我为什么没说作用，因为我忘记正态分布两个变量的名字了
         self.sigma=1  # 控制启发式初始化正态分布的变量
-        self.k1=1   # 适应度中路径长度的惩罚系数
-        self.k2=1  # 适应度中平滑度的惩罚系数
-        self.k4=0.5  #适应度中惩罚场的惩罚系数
+        self.k1=k1   # 适应度中路径长度的惩罚系数
+        self.k2=k2   # 适应度中平滑度的惩罚系数
+        self.k4=0.5  # 适应度中惩罚场的惩罚系数
         self.x=np.zeros((self.population_size, self.points, self.dim))# 初始化粒子群位置
         self.initx()#调用启发式初始化的程序
         self.blocks = []
@@ -142,6 +148,11 @@ class PSO(object):
         self.per_correct = 5  # 单步最大纠正次数
         self.correct=step*self.per_correct  # 最大单路径纠正次数
         self.maxdis=0  # 粒子间最大距离
+        self.blocks=[]
+        for i in range(len(map)):
+            for j in range(len(map[0])):
+                if map[i][j]==0:
+                    self.blocks.append([i,j])
 
         plt.clf()
         for j in range(len(self.blocks)):
@@ -161,10 +172,8 @@ class PSO(object):
         #
 
 
-        for i in range(self.population_size):
-            plt.plot(self.x[i, :, 0], self.x[i, :, 1])
-        # plt.plot(self.pg[:, 0],self.pg[:, 1])
-        plt.title('This is init iteration')
+        for i in range(self.population_size): plt.plot(self.x[i, :, 0], self.x[i, :, 1])
+        plt.title('This is init ')
         plt.xlim(self.x_bound[0], self.x_bound[1])
         plt.ylim(self.y_bound[0], self.y_bound[1])
         plt.pause(0.01)
@@ -193,10 +202,10 @@ class PSO(object):
 
     #获得一段路径，正态分布生成一个区间在【-pi，pi】的角度，弧度制，以及一段距离【0，2】（可能不精确）
     def get_a_small_route(self):
-        theta = np.random.normal(self.mu, self.sigma, 1)    #正太分布生成一个角度，弧度制
+        theta = np.random.normal(self.mu, math.pi/3, 1)    #正太分布生成一个角度，弧度制
         while (theta[0] < -math.pi or theta[0] > math.pi):  #如果这个值不在[-pi,pi]的范围
             theta = np.random.normal(self.mu, self.sigma, 1)    #重新随机一个值
-        tdis = np.random.normal(self.mu, self.sigma, 1)     #随机一个长度
+        tdis = np.random.normal(self.mu,1/3, 1)     #随机一个长度
         while (tdis[0] < -1 or tdis[0] > 1):    #如果太长或太短
             tdis = np.random.normal(self.mu, self.sigma, 1) #重新随机
         dis = 40/self.points + tdis[0] / 3   #新的移动距离是根据路径中的点数目而定
@@ -236,15 +245,13 @@ class PSO(object):
                     else:
                         fitx=fitx+k2*theta#日常加上平滑度
 
-            for j in range(self.points-2):#枚举除了终点外所有点
+            for j in range(self.points-1):#枚举除了终点外所有点
                 if(exist_way(self.x[i][j][0],self.x[i][j][1],self.x[i][j+1][0],self.x[i][j+1][1])==0):
                     fitx = fitx +punish
 
             for j in range(self.points - 1):  #self.x[i][self.points-1] 这个是终点
                 if (exist_way(self.x[i][j][0], self.x[i][j][1], self.x[i][j + 1][0], self.x[i][j + 1][1]) == 1):
                     fitx = fitx+k4*self.punish_field(self.x[i][j][0],self.x[i][j][1],self.x[i][j+1][0],self.x[i][j+1][1])
-
-
             fit[i]=fitx
 
         return fit
@@ -345,7 +352,8 @@ class PSO(object):
                 else:
                     return math.sqrt(a1)
     #迭代程序
-    def evolve(self):
+    def evolve(self, name):
+        f1 = open("E:/创新实验/code/GA-PSO/pictures/"+name+".txt","w")
         fig = plt.figure()
         acnumber=0
         for step in range(self.iteration):
@@ -367,32 +375,6 @@ class PSO(object):
                     ra2[self.points - 1][1] = 0
                     nv= self.w * self.v[i] + self.c1 * ra1 * (self.p[i] - self.x[i]) + self.c2 * ra2 * (self.pg - self.x[i])
                     nx=nv+self.x[i]
-                    '''
-                    # ================================================画图分界线===============
-                    plt.figure()
-                    plt.clf()
-                    plt.plot(self.x[i, :, 0], self.x[i, :, 1],'m-d')
-                    plt.plot(self.pg[:, 0], self.pg[:, 1], 'k--')
-                    plt.plot(self.p[i, :, 0], self.p[i, :, 1], 'k--')
-                    plt.plot(nx[:, 0], nx[:, 1], 'k--')
-                    for j in range(len(map)):
-                        for k in range(len(map[j])):
-                            if (map[j][k] == 0):
-                                xx = [j, j, j + 1, j + 1, j]
-                                yy = [k, k + 1, k + 1, k, k]
-                                plt.plot(xx, yy)
-                    plt.title('This is ' + str(step) + 'iteration ' + str(i) + ' partical after')
-                    plt.xlim(self.x_bound[0], self.x_bound[1])
-                    plt.ylim(self.y_bound[0], self.y_bound[1])
-                    my_x_ticks = np.arange(self.x_bound[0], self.x_bound[1], 1)
-                    my_y_ticks = np.arange(self.y_bound[0], self.y_bound[1], 1)
-                    plt.xticks(my_x_ticks)
-                    plt.yticks(my_y_ticks)
-                    plt.pause(3)
-                    plt.show()  # 循环外
-                    plt.close('all')
-                    # =================================================画图分界线==============
-'''
                     if allow_punish==1:
                         self.v[i] = nv
                         self.x[i] = nx
@@ -493,8 +475,7 @@ class PSO(object):
                         yy = [k, k + 1, k + 1, k, k]
                         plt.plot(xx, yy)
             for i in range(self.population_size): plt.plot(self.x[i,:,0],self.x[i,:,1])
-            # plt.plot(self.pg[:, 0],self.pg[:, 1])
-            plt.title('This is '+str(step)+' iteration after ')
+            plt.title('This is '+str(step)+' iteration  ')
             plt.xlim(self.x_bound[0], self.x_bound[1])
             plt.ylim(self.y_bound[0], self.y_bound[1])
             my_x_ticks = np.arange(self.x_bound[0], self.x_bound[1], 1)
@@ -507,34 +488,37 @@ class PSO(object):
             #重新计算适应度
             fitness = self.calculate_fitness(self.x)
 
-            # --------- 遗传算法 -----------#
-            tmp_x = deepcopy(self.x)
-            # 交叉互换
-            for i in range(int(len(self.x) * genetic_percent)):
-                p1 = np.random.randint(0, self.population_size)  # 随机选取两个粒子
-                p2 = np.random.randint(0, self.population_size)
-                rand_point = np.random.randint(1, self.points-2)
-                tmp = tmp_x[p1][rand_point]
-                tmp_x[p1][rand_point] = tmp_x[p2][rand_point]
-                tmp_x[p2][rand_point] = tmp
-            tmp_fitness = self.calculate_fitness(tmp_x)
-            for i in range(len(tmp_fitness)):
-                if tmp_fitness[i] < fitness[i]:
-                    self.x[i] = tmp_x[i]
+            if name == "ga" or name == "ga_smooth":
+                # --------- 遗传算法 -----------#
+                tmp_x = deepcopy(self.x)
+                # 交叉互换
+                for i in range(int(len(self.x) * genetic_percent)):
+                    p1 = np.random.randint(0, self.population_size)  # 随机选取两个粒子
+                    p2 = np.random.randint(0, self.population_size)
+                    rand_point = np.random.randint(1, self.points-2)
+                    tmp = tmp_x[p1][rand_point]
+                    tmp_x[p1][rand_point] = tmp_x[p2][rand_point]
+                    tmp_x[p2][rand_point] = tmp
+                tmp_fitness = self.calculate_fitness(tmp_x)
+                for i in range(len(tmp_fitness)):
+                    if tmp_fitness[i] < fitness[i]:
+                        self.x[i] = tmp_x[i]
 
-            tmp_x = deepcopy(self.x)
-            # 变异
-            for i in range(int(len(self.x))):
-                x_rand = -1 + 2*np.random.rand()
-                y_rand = -1 + 2*np.random.rand()
-                rand_point = np.random.randint(1, self.points-2) # 变化路径中的一个点
-                tmp_x[i][rand_point][0] += x_rand
-                tmp_x[i][rand_point][1] += y_rand
-            tmp_fitness = self.calculate_fitness(tmp_x)
-            for i in range(len(tmp_fitness)):
-                if tmp_fitness[i] < fitness[i]:
-                    self.x[i] = tmp_x[i]
-            # --------- 遗传算法 -----------#
+                tmp_x = deepcopy(self.x)
+                # 变异
+                for i in range(int(len(self.x))):
+                #     x_rand = -1 + 2*np.random.rand()
+                #     y_rand = -1 + 2*np.random.rand()
+                    rand_point = np.random.randint(1, self.points-2) # 变化路径中的一个点
+                    tmp_x[i][rand_point][0] = (tmp_x[i][rand_point-1][0] + tmp_x[i][rand_point+1][0])/2
+                    tmp_x[i][rand_point][1] = (tmp_x[i][rand_point-1][1] + tmp_x[i][rand_point+1][1])/2
+                    # tmp_x[i][rand_point][0] += x_rand
+                    # tmp_x[i][rand_point][1] += y_rand
+                tmp_fitness = self.calculate_fitness(tmp_x)
+                for i in range(len(tmp_fitness)):
+                    if tmp_fitness[i] < fitness[i]:
+                        self.x[i] = tmp_x[i]
+                # --------- 遗传算法 -----------#
 
             # 新一代出现了更小的fitness，所以更新全局最优fitness和位置
             for i in range(self.population_size):
@@ -542,12 +526,12 @@ class PSO(object):
                     self.individual_best_fitness[i]=fitness[i]
                     self.p[i]=self.x[i]
             if np.min(fitness) < self.global_best_fitness:#寻找最小适应度的是不是更新了全局
-                # print("???")
                 self.pg = deepcopy(self.x[np.argmin(fitness)])
                 self.global_best_fitness = deepcopy(np.min(fitness))
 
-            print("当前平均适应度",np.mean(fitness)," 最优适应度  ",self.global_best_fitness)
-
+            print(step, "  当前平均适应度",np.mean(fitness)," 最优适应度  ",self.global_best_fitness)
+            f1.write(str(self.global_best_fitness)+"\n")
+        f1.close()
     #初始化生成粒子x的部分
     def initx(self):
         for i in range(self.population_size):#枚举所有x
@@ -571,7 +555,7 @@ class PSO(object):
                         j=0
                         #如果当前点到终点不存在一条直线，那么j=0一切重来
                     else:#如果存在路径，将重点放进路径末尾
-                     #   print(end_point[0],'  ', end_point[1],'  ', self.x[i][j][0],'  ' ,self.x[i][j][1],'  ',exist_way(end_point[0], end_point[1], self.x[i][j][0] ,self.x[i][j][1] ))
+                     #  print(end_point[0],'  ', end_point[1],'  ', self.x[i][j][0],'  ' ,self.x[i][j][1],'  ',exist_way(end_point[0], end_point[1], self.x[i][j][0] ,self.x[i][j][1] ))
                         self.x[i][j + 1][0] = end_point[0]
                         self.x[i][j + 1][1] = end_point[1]
                         break
@@ -592,7 +576,7 @@ map1=[
 [1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,],
 [1,0,0,0,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,],
 [1,1,1,1,0,0,1,1,1,1,0,0,0,0,1,1,1,1,1,1,],
-[1,1,1,1,0,0,1,0,0,1,0,0,0,0,1,1,1,1,1,1,],
+[1,1,1,1,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,],
 [1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,],
 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,],
 [1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,0,0,0,0,1,],
@@ -603,6 +587,7 @@ map1=[
 [1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,],
 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,],
 ]
+
 #起点
 start_point=[0,0]
 #终点
@@ -610,44 +595,33 @@ end_point=[19,19]
 # 程序里使用到的地图全部定向到这个map上
 map=map1
 #粒子的数量
-number_of_particle=50
+number_of_particle=70
 #每条路径有多少个点
 step_per_route=35
 allow_punish=1      #允许惩罚开关
 punish=1000  #惩罚值
 #迭代次数
 iteration=100
+safe_distance=0.5
 # 遗传算法比例
 genetic_percent = 0.3
 plt.clf()
-safe_distance = 0.5
-# for j in range(len(map)):
-#     for k in range(len(map[j])):
-#         if (map[j][k] == 0):
-#             xx = [j, j, j + 1, j + 1, j]
-#             yy = [k, k + 1, k + 1, k, k]
-#             plt.plot(xx, yy)
-# x1=[3,19]
-# y1=[20,19]
-# #print(exist_way(x1[0],y1[0],x1[1],y1[1]))
-# plt.plot(x1,y1)
-# my_x_ticks = np.arange(0,20, 1)
-# my_y_ticks = np.arange(0, 20, 1)
-# plt.xticks(my_x_ticks)
-# plt.yticks(my_y_ticks)
-# plt.show()
-
-print(math.degrees(math.acos(1)))
-
-
-# pso = PSO(number_of_particle, step_per_route,iteration)#初始化
-# pso.evolve()#开始迭代
-
-
-
+for j in range(len(map)):
+    for k in range(len(map[j])):
+        if (map[j][k] == 0):
+            xx = [j, j, j + 1, j + 1, j]
+            yy = [k, k + 1, k + 1, k, k]
+            plt.plot(xx, yy)
+x1=[19,16.78980877158566 ]
+y1=[19, 8.39007763126324]
+#print(exist_way(x1[0],y1[0],x1[1],y1[1]))
+plt.plot(x1,y1)
+pso = PSO(number_of_particle, step_per_route,iteration,1,1,0)#初始化
+pso.evolve("ga_smooth")#开始迭代
 #print(pso.global_best_fitness)
-
+plt.show()
 end_time=time.time()
 print("using time = ",end_time-start_time)
 print("avg time = ",(end_time-start_time)/number_of_particle)
 print("最终最优适应度：",pso.global_best_fitness)
+print(pso.pg)
