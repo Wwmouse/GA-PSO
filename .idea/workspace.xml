@@ -12,7 +12,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/GA_PSO$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1557242338219" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/GA_PSO$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1559787851689" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/GA_PSO$test1.coverage" NAME="test1 Coverage Results" MODIFIED="1556779759437" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../github-ga" />
     <SUITE FILE_PATH="coverage/GA_PSO$PSO.coverage" NAME="PSO Coverage Results" MODIFIED="1556779919264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../github-ga" />
   </component>
@@ -21,12 +21,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ga_pso.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-359">
-              <caret line="339" column="87" selection-start-line="339" selection-start-column="87" selection-end-line="339" selection-end-column="87" />
+            <state relative-caret-position="-630">
+              <caret line="238" column="29" lean-forward="true" selection-start-line="238" selection-start-column="29" selection-end-line="238" selection-end-column="29" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#261#1873#0" />
-                <element signature="e#11570#16031#0" />
               </folding>
             </state>
           </provider>
@@ -49,6 +47,7 @@
       <find>show</find>
       <find>平滑度</find>
       <find>ga</find>
+      <find>initx</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -73,9 +72,10 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="191" />
-    <option name="width" value="1677" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="408" />
+    <option name="y" value="17" />
+    <option name="width" value="1380" />
     <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -83,20 +83,7 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="GA-PSO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GA-PSO" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -217,6 +204,9 @@
       <workItem from="1557225436605" duration="4961000" />
       <workItem from="1557240756342" duration="380000" />
       <workItem from="1557241935843" duration="1714000" />
+      <workItem from="1557304839927" duration="11092000" />
+      <workItem from="1557379418046" duration="15000" />
+      <workItem from="1559787194996" duration="948000" />
     </task>
     <task id="LOCAL-00001" summary="相似度惯性权重更新，对每一小段有问题的重新单个修正而不是重新随机路径，修改了判断路径是否存在的函数">
       <created>1556670468283</created>
@@ -271,7 +261,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26242000" />
+    <option name="totallyTimeSpent" value="38297000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -283,17 +273,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="210" y="0" width="1341" height="840" extended-state="0" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10288387" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.12327507" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932614" weight="0.2019774" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.28368795" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932614" visible="true" weight="0.25698325" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.37569833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32907802" />
@@ -303,10 +291,11 @@
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067383" side_tool="true" weight="0.23743017" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.32907802" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32907802" />
+      <window_info anchor="bottom" id="Messages" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" weight="0.42371705" />
+      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.2841823" />
       <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
@@ -429,12 +418,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ga_pso.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-359">
-          <caret line="339" column="87" selection-start-line="339" selection-start-column="87" selection-end-line="339" selection-end-column="87" />
+        <state relative-caret-position="-630">
+          <caret line="238" column="29" lean-forward="true" selection-start-line="238" selection-start-column="29" selection-end-line="238" selection-end-column="29" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#261#1873#0" />
-            <element signature="e#11570#16031#0" />
           </folding>
         </state>
       </provider>
