@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="32d67531-9de1-4155-9c39-fffd73f7ee98" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ga_pso.py" beforeDir="false" afterPath="$PROJECT_DIR$/ga_pso.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -12,9 +11,11 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/GA_PSO$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1557387831360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/GA_PSO$test1.coverage" NAME="test1 Coverage Results" MODIFIED="1556779759437" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../github-ga" />
     <SUITE FILE_PATH="coverage/GA_PSO$ga_pso.coverage" NAME="ga_pso Coverage Results" MODIFIED="1559791463061" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/GA_PSO$PSO.coverage" NAME="PSO Coverage Results" MODIFIED="1556779919264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../github-ga" />
+<<<<<<< HEAD
     <SUITE FILE_PATH="coverage/GA_PSO$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1557387831360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FUSProjectUsageTrigger">
@@ -54,12 +55,15 @@
         </counts>
       </usages-collector>
     </session>
+=======
+>>>>>>> origin/master
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ga_pso.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="317">
               <caret line="639" column="23" lean-forward="true" selection-start-line="639" selection-start-column="23" selection-end-line="639" selection-end-column="23" />
               <folding>
@@ -70,6 +74,12 @@
                 <element signature="e#6172#6644#0" />
                 <element signature="e#6746#7251#0" />
                 <element signature="e#10824#12203#0" />
+=======
+            <state relative-caret-position="232">
+              <caret line="269" column="22" lean-forward="true" selection-start-line="269" selection-start-column="22" selection-end-line="269" selection-end-column="22" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+>>>>>>> origin/master
               </folding>
             </state>
           </provider>
@@ -97,6 +107,9 @@
       <GitPushTagMode />
     </option>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/ga_pso.py" root0="SKIP_INSPECTION" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -109,24 +122,32 @@
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
   <component name="ProjectFrameBounds" extendedState="6">
+<<<<<<< HEAD
     <option name="x" value="847" />
     <option name="y" value="151" />
     <option name="width" value="1300" />
     <option name="height" value="980" />
+=======
+    <option name="x" value="816" />
+    <option name="y" value="41" />
+    <option name="width" value="1045" />
+    <option name="height" value="1050" />
+>>>>>>> origin/master
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
+<<<<<<< HEAD
     <panes />
+=======
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane" />
+    </panes>
+>>>>>>> origin/master
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -267,6 +288,7 @@
       <workItem from="1557114705714" duration="593000" />
       <workItem from="1557133881241" duration="6780000" />
       <workItem from="1557143363394" duration="2607000" />
+      <workItem from="1559789008292" duration="287000" />
     </task>
     <task id="LOCAL-00001" summary="相似度惯性权重更新，对每一小段有问题的重新单个修正而不是重新随机路径，修改了判断路径是否存在的函数">
       <created>1556670468283</created>
@@ -310,18 +332,27 @@
       <option name="project" value="LOCAL" />
       <updated>1557064571660</updated>
     </task>
+<<<<<<< HEAD
     <task id="LOCAL-00007" summary="惩罚场补充，新增安全系数safe——distance，目前设定是0.4">
       <created>1557412996488</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
       <updated>1557412996488</updated>
+=======
+    <task id="LOCAL-00007" summary="merge\">
+      <created>1559789139870</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1559789139870</updated>
+>>>>>>> origin/master
     </task>
     <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11127000" />
+    <option name="totallyTimeSpent" value="11418000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -333,8 +364,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <editor active="true" />
+=======
+    <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
+>>>>>>> origin/master
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.06724512" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -347,31 +382,79 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32907802" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" weight="0.32907802" />
+      <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49865952" weight="0.3282123" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50067383" side_tool="true" weight="0.23870057" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32907802" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5013405" side_tool="true" weight="0.3282123" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.3282123" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32907802" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+<<<<<<< HEAD
       <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.28217158" />
+=======
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.17761394" />
+>>>>>>> origin/master
       <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="相似度惯性权重更新，对每一小段有问题的重新单个修正而不是重新随机路径，修改了判断路径是否存在的函数" />
     <MESSAGE value="前一版本更新了existway中k可能无穷大无穷小，用99999代替了，这一版本更新了迭代的各种奇葩问题，但仍然收束不出理想解" />
     <MESSAGE value="existway 修改" />
     <MESSAGE value="添加了交叉互换的遗传算法&#10;尝试了一些次数，看不出效果如何。。&#10;不过确实是有通过这个遗传更新粒子的" />
+<<<<<<< HEAD
     <MESSAGE value="惩罚场补充，新增安全系数safe——distance，目前设定是0.4" />
     <option name="LAST_COMMIT_MESSAGE" value="惩罚场补充，新增安全系数safe——distance，目前设定是0.4" />
+=======
+    <MESSAGE value="merge\" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge\" />
+>>>>>>> origin/master
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -465,6 +548,7 @@
     <entry file="file://$PROJECT_DIR$/test2.py" />
     <entry file="file://$PROJECT_DIR$/ga_pso.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="317">
           <caret line="639" column="23" lean-forward="true" selection-start-line="639" selection-start-column="23" selection-end-line="639" selection-end-column="23" />
           <folding>
@@ -475,6 +559,12 @@
             <element signature="e#6172#6644#0" />
             <element signature="e#6746#7251#0" />
             <element signature="e#10824#12203#0" />
+=======
+        <state relative-caret-position="232">
+          <caret line="269" column="22" lean-forward="true" selection-start-line="269" selection-start-column="22" selection-end-line="269" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+>>>>>>> origin/master
           </folding>
         </state>
       </provider>
