@@ -114,9 +114,9 @@ class PSO(object):
         self.y_bound = [0, 20]  # 解空间范围
         self.mu=0  # 控制启发式初始化正态分布的变量，不要问我为什么没说作用，因为我忘记正态分布两个变量的名字了
         self.sigma=1  # 控制启发式初始化正态分布的变量
-        self.k1=1   # 适应度中路径长度的惩罚系数
-        self.k2=1  # 适应度中平滑度的惩罚系数
-        self.k4=0.5  #适应度中惩罚场的惩罚系数
+        self.k1=k1   # 适应度中路径长度的惩罚系数
+        self.k2=k2   # 适应度中平滑度的惩罚系数
+        self.k4=0.5  # 适应度中惩罚场的惩罚系数
         self.x=np.zeros((self.population_size, self.points, self.dim))# 初始化粒子群位置
         self.initx()#调用启发式初始化的程序
         self.blocks = []
@@ -140,21 +140,6 @@ class PSO(object):
             self.v[i][0][1] = 0
             self.v[i][self.points-1][0] = 0
             self.v[i][self.points-1][1] = 0
-        if iiii==0:
-            self.initx()#调用启发式初始化的程序
-            print("init")
-        else:
-            self.x=deepcopy(kkk1)
-            print("get!")
-        if iiii==0:
-            self.v = np.random.rand(self.population_size, self.points,self.dim)  # 初始化粒子群速度
-            for i in range(self.population_size):   #因为起点终点不能变，所有粒子的期待你终点的随机速度都是0
-                self.v[i][0][0]=0
-                self.v[i][0][1] = 0
-                self.v[i][self.points-1][0] = 0
-                self.v[i][self.points-1][1] = 0
-        else:
-            self.v=kkk
         fitness = self.calculate_fitness(self.x)#调用计算适应度的函数，获得适应度的矩阵
         self.p = self.x  # 个体的最佳路径          我们的适应度是越小越好
         self.pg =deepcopy( self.x[np.argmin(fitness)])  # 全局最佳路径
@@ -217,10 +202,10 @@ class PSO(object):
 
     #获得一段路径，正态分布生成一个区间在【-pi，pi】的角度，弧度制，以及一段距离【0，2】（可能不精确）
     def get_a_small_route(self):
-        theta = np.random.normal(self.mu, self.sigma, 1)    #正太分布生成一个角度，弧度制
+        theta = np.random.normal(self.mu, math.pi/3, 1)    #正太分布生成一个角度，弧度制
         while (theta[0] < -math.pi or theta[0] > math.pi):  #如果这个值不在[-pi,pi]的范围
             theta = np.random.normal(self.mu, self.sigma, 1)    #重新随机一个值
-        tdis = np.random.normal(self.mu, self.sigma, 1)     #随机一个长度
+        tdis = np.random.normal(self.mu,1/3, 1)     #随机一个长度
         while (tdis[0] < -1 or tdis[0] > 1):    #如果太长或太短
             tdis = np.random.normal(self.mu, self.sigma, 1) #重新随机
         dis = 40/self.points + tdis[0] / 3   #新的移动距离是根据路径中的点数目而定
@@ -249,13 +234,13 @@ class PSO(object):
                     theta=(a*a-d[j]*d[j]-d[j-1]*d[j-1])/(-2*d[j]*d[j-1])#余弦定理，计算出这个点的余弦值
                     fitx=fitx+k2*theta#日常加上平滑度
 
-            for j in range(self.points-2):#枚举除了终点外所有点
+            for j in range(self.points-1):#枚举除了终点外所有点
                 if(exist_way(self.x[i][j][0],self.x[i][j][1],self.x[i][j+1][0],self.x[i][j+1][1])==0):
                     fitx = fitx +punish
 
             for j in range(self.points - 1):  #self.x[i][self.points-1] 这个是终点
                 if (exist_way(self.x[i][j][0], self.x[i][j][1], self.x[i][j + 1][0], self.x[i][j + 1][1]) == 1):
-                    fitx = fitx+self.punish_field(self.x[i][j][0],self.x[i][j][1],self.x[i][j+1][0],self.x[i][j+1][1])
+                    fitx = fitx+k4*self.punish_field(self.x[i][j][0],self.x[i][j][1],self.x[i][j+1][0],self.x[i][j+1][1])
             fit[i]=fitx
 
         return fit
@@ -542,7 +527,6 @@ class PSO(object):
             j=0#从0开始推算路径
             #当point=30时，point-1的位置存的是终点
             while(j<=self.points-3):
-
                 o_theta=azimuthAngle(self.x[i][j][0],self.x[i][j][1],end_point[0],end_point[1])#求出弧度制的当前点到终点的方向
                 t_theta,dis=self.get_a_small_route()#获得一个弧度制角度与就离
                 #以x[i][j]第i条路径第j个点为当前点，如果到新的落点不存在一条路径就重新生成一个落点
@@ -580,7 +564,7 @@ map1=[
 [1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,],
 [1,0,0,0,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,],
 [1,1,1,1,0,0,1,1,1,1,0,0,0,0,1,1,1,1,1,1,],
-[1,1,1,1,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,],
+[1,1,1,1,0,0,1,0,0,1,0,0,0,0,1,1,1,1,1,1,],
 [1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,],
 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,],
 [1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,0,0,0,0,1,],
@@ -601,11 +585,12 @@ map=map1
 #粒子的数量
 number_of_particle=70
 #每条路径有多少个点
-step_per_route=35
+step_per_route=30
 allow_punish=1      #允许惩罚开关
 punish=1000  #惩罚值
 #迭代次数
 iteration=100
+safe_distance=0.5
 # 遗传算法比例
 genetic_percent = 0.3
 plt.clf()
@@ -619,11 +604,12 @@ x1=[19,16.78980877158566 ]
 y1=[19, 8.39007763126324]
 #print(exist_way(x1[0],y1[0],x1[1],y1[1]))
 plt.plot(x1,y1)
-pso = PSO(number_of_particle, step_per_route,iteration)#初始化
-pso.evolve()#开始迭代
+pso = PSO(number_of_particle, step_per_route,iteration,1,1,0)#初始化
+pso.evolve("ga_smooth")#开始迭代
 #print(pso.global_best_fitness)
 plt.show()
 end_time=time.time()
 print("using time = ",end_time-start_time)
 print("avg time = ",(end_time-start_time)/number_of_particle)
 print("最终最优适应度：",pso.global_best_fitness)
+print(pso.pg)
