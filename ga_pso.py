@@ -236,14 +236,26 @@ class PSO(object):
                     if theta>1:
                         theta=1
                     u=math.acos(theta)
-                    degree=abs(math.degrees(u))
+                    degree=180-abs(math.degrees(u))
                     # print(degree )
-                    if degree<180-35:
-                        fitx = fitx + k2 * theta  # 日常加上平滑度
-                        # fitx = fitx + k2 * (180-degree)* (180-degree) # 日常加上平滑度
-                    else:
-                        fitx=fitx+k2*theta#日常加上平滑度
+                    #
+                    # if degree>35:
+                    #     # fitx = fitx + k2 * theta  # 日常加上平滑度
+                    #     p = degree*degree/100+22.75
+                    #     fitx = fitx + k2 * p  # 日常加上平滑度
+                    # else:
+                    #     p = degree
+                    #     fitx = fitx + k2 * p  # 日常加上平滑度
+                    #     # fitx=fitx+k2*theta#日常加上平滑度
 
+                    if theta>-0.81915204:
+                        # fitx = fitx + k2 * theta  # 日常加上平滑度
+                        p = (theta+1)*4
+                        fitx = fitx + k2 * p  # 日常加上平滑度
+                    else:
+                        p = theta+1
+                        fitx = fitx + k2 * p  # 日常加上平滑度
+                        # fitx=fitx+k2*theta#日常加上平滑度
             for j in range(self.points-1):#枚举除了终点外所有点
                 if(exist_way(self.x[i][j][0],self.x[i][j][1],self.x[i][j+1][0],self.x[i][j+1][1])==0):
                     fitx = fitx +punish
@@ -701,7 +713,7 @@ class PSO(object):
             avg1=0
             if count>0:
                 avg1=total_dis/count
-        print("平均危险距离为  ",avg1)
+        print("平均危险距离为  ",avg1,"  ",total_dis,"  ",count)
 start_time=time.time()
 #地图信息，0为不能走，1为可以走，后面加上势场之后就将1换成别的数值
 map1=[
