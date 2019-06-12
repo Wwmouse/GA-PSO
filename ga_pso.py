@@ -504,20 +504,61 @@ class PSO(object):
                     if tmp_fitness[i] < fitness[i]:
                         self.x[i] = tmp_x[i]
 
-                tmp_x = deepcopy(self.x)
                 # 变异
+                tmp_x = deepcopy(self.x)
                 for i in range(int(len(self.x))):
-                #     x_rand = -1 + 2*np.random.rand()
-                #     y_rand = -1 + 2*np.random.rand()
-                    rand_point = np.random.randint(1, self.points-2) # 变化路径中的一个点
+                    rand_point = np.random.randint(1, self.points-1) # 变化路径中的一个点
                     tmp_x[i][rand_point][0] = (tmp_x[i][rand_point-1][0] + tmp_x[i][rand_point+1][0])/2
                     tmp_x[i][rand_point][1] = (tmp_x[i][rand_point-1][1] + tmp_x[i][rand_point+1][1])/2
-                    # tmp_x[i][rand_point][0] += x_rand
-                    # tmp_x[i][rand_point][1] += y_rand
                 tmp_fitness = self.calculate_fitness(tmp_x)
                 for i in range(len(tmp_fitness)):
                     if tmp_fitness[i] < fitness[i]:
                         self.x[i] = tmp_x[i]
+
+                tmp_x = deepcopy(self.x)
+                for i in range(int(len(self.x))):
+                    x_rand = -1 + 2*np.random.rand()
+                    y_rand = -1 + 2*np.random.rand()
+                    rand_point = np.random.randint(1, self.points-1) # 变化路径中的一个点
+                    tmp_x[i][rand_point][0] += x_rand
+                    tmp_x[i][rand_point][1] += y_rand
+                tmp_fitness = self.calculate_fitness(tmp_x)
+                for i in range(len(tmp_fitness)):
+                    if tmp_fitness[i] < fitness[i]:
+                        self.x[i] = tmp_x[i]
+
+                # 替换适应度最大的粒子
+                tmp_x = deepcopy(self.x)
+                if step < self.iteration / 2:
+                    i = 0 # 适应度值最大的粒子
+                    for t in range(len(fitness)):
+                        if fitness[t] > fitness[i]:
+                            i = t
+                    j = 0  # 从0开始推算路径
+                    # point-1的位置存的是终点
+                    while (j <= self.points - 3):
+                        o_theta = azimuthAngle(self.x[i][j][0], self.x[i][j][1], end_point[0],
+                                               end_point[1])  # 求出弧度制的当前点到终点的方向
+                        t_theta, dis = self.get_a_small_route()  # 获得一个弧度制角度与就离
+                        # 以x[i][j]第i条路径第j个点为当前点，如果到新的落点不存在一条路径就重新生成一个落点
+                        while (exist_way(self.x[i][j][0], self.x[i][j][1],
+                                         self.x[i][j][0] + dis * math.cos(t_theta + o_theta),
+                                         self.x[i][j][1] + dis * math.sin(t_theta + o_theta)) == 0):
+                            t_theta, dis = self.get_a_small_route()  # 每个落点由新的角度距离决定
+                        # while结束后新的落点必定是可以到达的
+                        self.x[i][j + 1][0] = self.x[i][j][0] + dis * math.cos(t_theta + o_theta)  # 存进下一个点x
+                        self.x[i][j + 1][1] = self.x[i][j][1] + dis * math.sin(t_theta + o_theta)  # 存进下一个点y
+                        j = j + 1  # j永远代表着当前的落点位置
+                        # 为什么上面while退出条件是-3？因为j=point-3的时候必定会触发下面这句j=point-2(因为j++)
+                        if (j == self.points - 2):  # 如果当前点是终点前一个点就需要判断了，因为终点是固定的
+                            if (exist_way(end_point[0], end_point[1], self.x[i][j][0], self.x[i][j][1]) == 0):
+                                j = 0
+                                # 如果当前点到终点不存在一条直线，那么j=0一切重来
+                            else:  # 如果存在路径，将重点放进路径末尾
+                                #  print(end_point[0],'  ', end_point[1],'  ', self.x[i][j][0],'  ' ,self.x[i][j][1],'  ',exist_way(end_point[0], end_point[1], self.x[i][j][0] ,self.x[i][j][1] ))
+                                self.x[i][j + 1][0] = end_point[0]
+                                self.x[i][j + 1][1] = end_point[1]
+                                break
                 # --------- 遗传算法 -----------#
 
             # 新一代出现了更小的fitness，所以更新全局最优fitness和位置
