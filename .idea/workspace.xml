@@ -12,20 +12,53 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/GA_PSO$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1557387831360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/GA_PSO$test1.coverage" NAME="test1 Coverage Results" MODIFIED="1556779759437" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../github-ga" />
+    <SUITE FILE_PATH="coverage/GA_PSO$ga_pso.coverage" NAME="ga_pso Coverage Results" MODIFIED="1560362668012" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/GA_PSO$PSO.coverage" NAME="PSO Coverage Results" MODIFIED="1556779919264" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../github-ga" />
-    <SUITE FILE_PATH="coverage/GA_PSO$ga_pso.coverage" NAME="ga_pso Coverage Results" MODIFIED="1559826520118" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/GA_PSO$test2.coverage" NAME="test2 Coverage Results" MODIFIED="1557387831360" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-699805531">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="645" />
+          <entry key="txt" value="5" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="PLAIN_TEXT" value="5" />
+          <entry key="Python" value="645" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ga_pso.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="65">
-              <caret line="518" column="28" selection-start-line="518" selection-start-column="28" selection-end-line="518" selection-end-column="28" />
+            <state relative-caret-position="314">
+              <caret line="673" column="67" selection-start-line="673" selection-start-column="67" selection-end-line="673" selection-end-column="67" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
+                <element signature="e#261#2073#0" />
+                <element signature="e#2157#2687#0" />
+                <element signature="e#2785#6061#0" />
+                <element signature="e#6110#6454#0" />
+                <element signature="e#6494#6966#0" />
+                <element signature="e#7068#7564#0" />
+                <element signature="e#9625#11255#0" />
+                <element signature="e#9613#11538#0" />
+                <element signature="e#11599#12978#0" />
+                <element signature="e#13025#25502#0" />
+                <element signature="e#25547#27190#0" />
               </folding>
             </state>
           </provider>
@@ -50,6 +83,7 @@
       <find>safe_distance</find>
       <find>step</find>
       <find>get_a_small_route</find>
+      <find>f1</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -74,10 +108,16 @@
       </list>
     </option>
   </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="420" />
-    <option name="y" value="57" />
-    <option name="width" value="1429" />
+    <option name="y" value="56" />
+    <option name="width" value="1430" />
     <option name="height" value="1050" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -85,27 +125,7 @@
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="GA-PSO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GA-PSO" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GA-PSO" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GA-PSO" type="462c0819:PsiDirectoryNode" />
-              <item name="pictures" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="Scope" />
-      <pane id="ProjectPane" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -319,7 +339,14 @@
       <option name="project" value="LOCAL" />
       <updated>1559801642694</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="judge">
+      <created>1560361831422</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1560361831422</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -335,7 +362,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.113270774" />
@@ -343,7 +370,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49798927" visible="true" weight="0.20530726" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49798927" visible="true" weight="0.2822695" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.28368795" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -357,7 +384,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.27010724" />
+      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.27010724" />
       <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
@@ -399,20 +426,9 @@
         </entry>
       </map>
     </option>
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list />
-          </value>
-        </entry>
-        <entry key="User">
-          <value>
-            <list />
-          </value>
-        </entry>
-      </map>
-    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="相似度惯性权重更新，对每一小段有问题的重新单个修正而不是重新随机路径，修改了判断路径是否存在的函数" />
@@ -421,7 +437,8 @@
     <MESSAGE value="添加了交叉互换的遗传算法&#10;尝试了一些次数，看不出效果如何。。&#10;不过确实是有通过这个遗传更新粒子的" />
     <MESSAGE value="merge\" />
     <MESSAGE value="merge" />
-    <option name="LAST_COMMIT_MESSAGE" value="merge" />
+    <MESSAGE value="judge" />
+    <option name="LAST_COMMIT_MESSAGE" value="judge" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -518,10 +535,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ga_pso.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="518" column="28" selection-start-line="518" selection-start-column="28" selection-end-line="518" selection-end-column="28" />
+        <state relative-caret-position="314">
+          <caret line="673" column="67" selection-start-line="673" selection-start-column="67" selection-end-line="673" selection-end-column="67" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#261#2073#0" />
+            <element signature="e#2157#2687#0" />
+            <element signature="e#2785#6061#0" />
+            <element signature="e#6110#6454#0" />
+            <element signature="e#6494#6966#0" />
+            <element signature="e#7068#7564#0" />
+            <element signature="e#9625#11255#0" />
+            <element signature="e#9613#11538#0" />
+            <element signature="e#11599#12978#0" />
+            <element signature="e#13025#25502#0" />
+            <element signature="e#25547#27190#0" />
           </folding>
         </state>
       </provider>

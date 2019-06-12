@@ -667,8 +667,8 @@ class PSO(object):
             a4 = float(x[j+1][1])
             if self.punish_field(a1, a2,a3, a4)!=0:
                 danger_point=danger_point+1
-        print("危险路径比例  ",danger_point*100/(self.points-1),"%")
-
+        print("危险路径比例  ",danger_point*100/(self.points-1),"%",danger_point)
+        max_angle=0
         total_angle=0
         for j in range(1, self.points - 1):  # 枚举除了起点终点外所有点
             a = math.sqrt((x[j - 1][0] - x[j + 1][0]) * (x[j - 1][0] - x[j + 1][0]) + (
@@ -682,9 +682,11 @@ class PSO(object):
                     theta = 1
                 u = math.acos(theta)
                 degree = 180-abs(math.degrees(u))
+                if (degree>max_angle):
+                    max_angle=degree
                 total_angle=total_angle+degree
         print("平均转角度数  ",total_angle/(self.points-2))
-
+        print("最大转角度数  ",  max_angle)
         total_dis=0
         count=0
         for j in range(self.points - 1):  # self.x[i][self.points-1] 这个是终点
@@ -692,11 +694,14 @@ class PSO(object):
             a2 = float(x[j][1])
             a3 = float(x[j + 1][0])
             a4 = float(x[j + 1][1])
-            # d=self.punish_field11(a1, a2, a3, a4)
+            d=self.punish_field11(a1, a2, a3, a4)
             if (d<safe_distance):
                 count=count+1
                 total_dis=total_dis+d
-        print("平均危险距离为  ",total_dis/count)
+            avg1=0
+            if count>0:
+                avg1=total_dis/count
+        print("平均危险距离为  ",avg1)
 start_time=time.time()
 #地图信息，0为不能走，1为可以走，后面加上势场之后就将1换成别的数值
 map1=[
@@ -710,7 +715,7 @@ map1=[
 [1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,],
 [1,0,0,0,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,1,],
 [1,1,1,1,0,0,1,1,1,1,0,0,0,0,1,1,1,1,1,1,],
-[1,1,1,1,0,0,1,0,0,0,0,0,0,0,1,1,1,1,1,1,],
+[1,1,1,1,0,0,1,0,0,1,0,0,0,0,1,1,1,1,1,1,],
 [1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,1,1,1,1,1,],
 [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,1,],
 [1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,0,0,0,0,1,],
@@ -751,7 +756,7 @@ y1=[19, 8.39007763126324]
 #print(exist_way(x1[0],y1[0],x1[1],y1[1]))
 plt.plot(x1,y1)
 pso = PSO(number_of_particle, step_per_route,iteration,1,1,0)#初始化
-# pso.evolve("ga_smooth")#开始迭代
+pso.evolve("ga_smooth")#开始迭代
 
 #print(pso.global_best_fitness)
 plt.show()
