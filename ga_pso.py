@@ -12,7 +12,6 @@ def exist_way(a,b,c,d):  # 地图理解为左shang角为原点(x,y)访问map是y
     y1=b
     x2=c
     y2=d
-
     nx1=int(math.floor(x1))
     nx2 = int(math.floor(x2))
     ny1 = int(math.floor(y1))
@@ -238,7 +237,7 @@ class PSO(object):
                         theta=1
                     u=math.acos(theta)
                     degree=abs(math.degrees(u))
-                    print(degree )
+                    # print(degree )
                     if degree<180-35:
                         fitx = fitx + k2 * theta  # 日常加上平滑度
                         # fitx = fitx + k2 * (180-degree)* (180-degree) # 日常加上平滑度
@@ -255,6 +254,56 @@ class PSO(object):
             fit[i]=fitx
 
         return fit
+
+
+    def punish_field11(self,x1,y1,x2,y2):
+        # print(x1,y1,x2,y2)
+        if x1 < x2:
+            x_min = x1
+            x_max = x2
+        else:
+            x_min = x2
+            x_max = x1
+        if y1 < y2:
+            y_min = y1
+            y_max = y2
+        else:
+            y_min = y2
+            y_max = y1
+        x_min=x_min-safe_distance-1
+        x_max=x_max+safe_distance+1
+        y_min = y_min - safe_distance-1
+        y_max = y_max + safe_distance+1
+        x_min=math.ceil(x_min)
+        x_max=math.floor(x_max)
+        y_min = math.ceil(y_min)
+        y_max = math.floor(y_max)
+        if (x_min<0):x_min=0
+        if (x_max>len(map)):x_max=len(map)
+        if (y_min < 0): y_min = 0
+        if (y_max > len(map[0])): y_max = len(map[0])
+        p_min=self.points*100
+        for i in range(len(self.blocks)):
+            if (self.blocks[i][0] <= x_max and self.blocks[i][0] >= x_min and self.blocks[i][1] <= y_max and
+                    self.blocks[i][1] >= y_min):
+                bx=self.blocks[i][0]
+                by=self.blocks[i][1]
+                p_min=self.shortest_distance(x1,y1,x2,y2,bx,by)
+                # print(bx , ',', by, '    ', p_min)
+                a=self.shortest_distance(x1,y1,x2,y2,bx+1,by)
+                # print(bx+1,',',by,'    ',a)
+                if p_min>a:p_min=a
+                a = self.shortest_distance(x1, y1, x2, y2, bx + 1, by+1)
+                # print(bx + 1, ',', by+1, '    ', a)
+                if p_min > a: p_min = a
+
+                a = self.shortest_distance(x1, y1, x2, y2, bx , by+1)
+                # print(bx, ',', by+1, '    ', a)
+                if p_min > a: p_min = a
+
+
+
+        return p_min
 
     def punish_field(self,x1,y1,x2,y2):
         # print(x1,y1,x2,y2)
@@ -353,7 +402,7 @@ class PSO(object):
                     return math.sqrt(a1)
     #迭代程序
     def evolve(self, name):
-        f1 = open("E:/创新实验/code/GA-PSO/pictures/"+name+".txt","w")
+        # f1 = open("E:/创新实验/code/GA-PSO/pictures/"+name+".txt","w")
         fig = plt.figure()
         acnumber=0
         for step in range(self.iteration):
@@ -506,6 +555,7 @@ class PSO(object):
 
                 # 变异
                 tmp_x = deepcopy(self.x)
+                # 变异
                 for i in range(int(len(self.x))):
                     rand_point = np.random.randint(1, self.points-1) # 变化路径中的一个点
                     tmp_x[i][rand_point][0] = (tmp_x[i][rand_point-1][0] + tmp_x[i][rand_point+1][0])/2
@@ -571,8 +621,8 @@ class PSO(object):
                 self.global_best_fitness = deepcopy(np.min(fitness))
 
             print(step, "  当前平均适应度",np.mean(fitness)," 最优适应度  ",self.global_best_fitness)
-            f1.write(str(self.global_best_fitness)+"\n")
-        f1.close()
+            # f1.write(str(self.global_best_fitness)+"\n")
+        # f1.close()
     #初始化生成粒子x的部分
     def initx(self):
         for i in range(self.population_size):#枚举所有x
@@ -602,8 +652,51 @@ class PSO(object):
                         break
         return 0
 
+    def judge(self,x):
+        dis=0
+        d = np.zeros(self.points)  # 用来存放临时计算的距离，d[0]中存放的是第零个点到第一个点的距离
+        for j in range(self.points - 1):  # 枚举除了终点外所有点
+            d[j] =(np.sqrt(np.square(x[j + 1][0] - x[j][0]) + np.square(x[j + 1][1] - x[j][1])))
+            dis= dis+  d[j] # 计算距离
+        print("距离  ",dis)
+        danger_point=0
+        for j in range(self.points - 1):  # self.x[i][self.points-1] 这个是终点
+            a1 = float(x[j][0])
+            a2 = float(x[j][1])
+            a3 = float(x[j+1][0])
+            a4 = float(x[j+1][1])
+            if self.punish_field(a1, a2,a3, a4)!=0:
+                danger_point=danger_point+1
+        print("危险路径比例  ",danger_point*100/(self.points-1),"%")
 
+        total_angle=0
+        for j in range(1, self.points - 1):  # 枚举除了起点终点外所有点
+            a = math.sqrt((x[j - 1][0] - x[j + 1][0]) * (x[j - 1][0] - x[j + 1][0]) + (
+                        x[j - 1][1] - x[j + 1][1]) * (x[j - 1][1] - x[j + 1][1]))
+            # 计算这个点的对边长度
+            if (d[j] != 0) and (d[j - 1] != 0):
+                theta = (a * a - d[j] * d[j] - d[j - 1] * d[j - 1]) / (-2 * d[j] * d[j - 1])  # 余弦定理，计算出这个点的余弦值
+                if (theta < -1):
+                    theta = -1
+                if theta > 1:
+                    theta = 1
+                u = math.acos(theta)
+                degree = 180-abs(math.degrees(u))
+                total_angle=total_angle+degree
+        print("平均转角度数  ",total_angle/(self.points-2))
 
+        total_dis=0
+        count=0
+        for j in range(self.points - 1):  # self.x[i][self.points-1] 这个是终点
+            a1 = float(x[j][0])
+            a2 = float(x[j][1])
+            a3 = float(x[j + 1][0])
+            a4 = float(x[j + 1][1])
+            # d=self.punish_field11(a1, a2, a3, a4)
+            if (d<safe_distance):
+                count=count+1
+                total_dis=total_dis+d
+        print("平均危险距离为  ",total_dis/count)
 start_time=time.time()
 #地图信息，0为不能走，1为可以走，后面加上势场之后就将1换成别的数值
 map1=[
@@ -658,11 +751,12 @@ y1=[19, 8.39007763126324]
 #print(exist_way(x1[0],y1[0],x1[1],y1[1]))
 plt.plot(x1,y1)
 pso = PSO(number_of_particle, step_per_route,iteration,1,1,0)#初始化
-pso.evolve("ga_smooth")#开始迭代
+# pso.evolve("ga_smooth")#开始迭代
+
 #print(pso.global_best_fitness)
 plt.show()
 end_time=time.time()
 print("using time = ",end_time-start_time)
 print("avg time = ",(end_time-start_time)/number_of_particle)
 print("最终最优适应度：",pso.global_best_fitness)
-print(pso.pg)
+pso.judge(pso.pg)
